@@ -308,174 +308,6 @@
     .nav-item { min-width: 44px; }
   }
 
-
-  /* ── IA ASSISTENTE ─────────────────────────────────────── */
-  .ia-chip {
-    padding: 7px 14px;
-    border-radius: 20px;
-    border: 1px solid var(--border);
-    background: var(--bg-card);
-    color: var(--text);
-    font-size: 12px;
-    cursor: pointer;
-    transition: all .15s;
-    white-space: nowrap;
-    font-family: inherit;
-  }
-  .ia-chip:hover {
-    border-color: var(--green);
-    color: var(--green);
-    background: rgba(29,158,117,.06);
-  }
-  .ia-action-chip {
-    padding: 4px 12px;
-    border-radius: 20px;
-    border: 1px solid var(--border);
-    background: transparent;
-    color: var(--text-muted);
-    font-size: 11px;
-    cursor: pointer;
-    transition: all .15s;
-    white-space: nowrap;
-    font-family: inherit;
-  }
-  .ia-action-chip:hover {
-    border-color: var(--green);
-    color: var(--green);
-    background: rgba(29,158,117,.06);
-  }
-  /* Mensagem do usuário */
-  .ia-msg-user {
-    display: flex;
-    justify-content: flex-end;
-    padding: 0 24px;
-    max-width: 860px;
-    margin: 0 auto;
-    width: 100%;
-    box-sizing: border-box;
-  }
-  .ia-msg-user .ia-bubble-user {
-    background: var(--green);
-    color: white;
-    padding: 12px 18px;
-    border-radius: 18px 18px 4px 18px;
-    font-size: 14px;
-    line-height: 1.6;
-    max-width: 75%;
-    word-wrap: break-word;
-  }
-  /* Mensagem da IA */
-  .ia-msg-ai {
-    display: flex;
-    gap: 12px;
-    padding: 0 24px;
-    max-width: 860px;
-    margin: 0 auto;
-    width: 100%;
-    box-sizing: border-box;
-  }
-  .ia-bubble-ai {
-    flex: 1;
-    min-width: 0;
-  }
-  .ia-bubble-ai .ia-text {
-    font-size: 14px;
-    line-height: 1.75;
-    color: var(--text);
-  }
-  /* Cards de resposta estruturada */
-  .ia-response-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 12px;
-    margin-top: 14px;
-  }
-  .ia-response-card {
-    background: var(--bg);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 14px;
-  }
-  .ia-response-card-title {
-    font-size: 10px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: .08em;
-    margin-bottom: 10px;
-  }
-  .ia-response-card ul {
-    margin: 0; padding: 0 0 0 14px;
-    font-size: 12px;
-    line-height: 1.7;
-    color: var(--text);
-  }
-  /* Thinking indicator */
-  .ia-thinking {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 12px;
-    color: var(--text-muted);
-    padding: 8px 0;
-  }
-  .ia-thinking-dots {
-    display: flex;
-    gap: 3px;
-  }
-  .ia-thinking-dots span {
-    width: 5px;
-    height: 5px;
-    border-radius: 50%;
-    background: var(--green);
-    animation: iaBounce 1.2s infinite;
-    opacity: .4;
-  }
-  .ia-thinking-dots span:nth-child(2) { animation-delay: .2s; }
-  .ia-thinking-dots span:nth-child(3) { animation-delay: .4s; }
-  @keyframes iaBounce {
-    0%,60%,100% { transform: translateY(0); opacity:.4; }
-    30% { transform: translateY(-5px); opacity:1; }
-  }
-  /* Action buttons below AI response */
-  .ia-response-actions {
-    display: flex;
-    gap: 8px;
-    margin-top: 14px;
-    flex-wrap: wrap;
-  }
-  .ia-response-actions button {
-    padding: 7px 14px;
-    border-radius: 8px;
-    font-size: 11px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all .15s;
-    font-family: inherit;
-    display: flex;
-    align-items: center;
-    gap: 5px;
-  }
-  .ia-btn-primary {
-    background: var(--green);
-    color: white;
-    border: none;
-  }
-  .ia-btn-primary:hover { background: #0D7A5A; }
-  .ia-btn-secondary {
-    background: transparent;
-    color: var(--text);
-    border: 1px solid var(--border);
-  }
-  .ia-btn-secondary:hover { border-color: var(--green); color: var(--green); }
-  /* Mobile */
-  @media (max-width: 768px) {
-    #ia-context-bar { flex-wrap: wrap; gap: 10px; padding: 10px 16px; }
-    #ia-context-bar > div:first-child { flex-wrap: wrap; gap: 8px; }
-    .ia-msg-ai, .ia-msg-user { padding: 0 14px; }
-    #chat-messages { padding: 16px 0; }
-    .ia-response-grid { grid-template-columns: 1fr; }
-  }
-
 </style>
 <style>
   :root {
@@ -642,10 +474,9 @@
   /* MAIN */
   .main {
     flex: 1;
+    overflow-y: auto;
     display: flex;
     flex-direction: column;
-    min-height: 0;
-    overflow: hidden;
   }
 
   .topbar {
@@ -723,19 +554,10 @@
   .content {
     padding: 28px;
     flex: 1;
-    min-height: 0;
-    overflow-y: auto;
   }
 
-
-
-  #page-chat.active {
-    display: flex !important;
-    flex-direction: column;
-    padding: 0;
-    overflow: hidden;
-  }
-
+  .page { display: none; }
+  .page.active { display: block; animation: fadeIn 0.25s ease; }
 
   @keyframes fadeOut { from{opacity:1;transform:translateY(0)} to{opacity:0;transform:translateY(10px)} }
   @keyframes fadeIn {
@@ -1994,9 +1816,6 @@
   ::-webkit-scrollbar-track { background: transparent; }
   ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
   ::-webkit-scrollbar-thumb:hover { background: var(--text-light); }
-
-  /* PAGE VISIBILITY */
-  .page { padding: 16px; }
 </style>
 </head>
 <body>
@@ -3100,7 +2919,10 @@
   if(typeof addClientHistoryEntry === 'function') addClientHistoryEntry(clientId,'treino','Treino criado: '+nome+' ('+count+' exercícios)');
   if(typeof updateDashboardMetrics === 'function') updateDashboardMetrics();
   showToast('Treino salvo com sucesso! ✓');
+  // Save to fichas
+  if(typeof salvarFicha === 'function') salvarFicha(clientId, nome, count);
 })()">Salvar treino ✓</button>
+            <button class="btn btn-primary" style="background:var(--sidebar);color:white;margin-left:8px;" onclick="abrirFichaInteligenteModal()">📋 Gerar Ficha</button>
             </div>
 
           </div>
@@ -3202,107 +3024,79 @@
     </div>
 
     <!-- CHAT IA -->
-    <div id="page-chat" class="page" style="padding:0;height:calc(100vh - 60px);overflow:hidden;">
+    <div id="page-chat" class="page" style="padding:0;display:flex;flex-direction:column;height:calc(100vh - 60px);overflow:hidden;">
 
-  <!-- ══ BARRA DE CONTEXTO DO CLIENTE ══ -->
-  <div id="ia-context-bar" style="flex-shrink:0;padding:12px 24px;border-bottom:1px solid var(--border);background:var(--bg-card);display:flex;align-items:center;gap:16px;">
+  <!-- BARRA CLIENTE ATIVO -->
+  <div style="flex-shrink:0;padding:12px 24px;border-bottom:1px solid var(--border);background:var(--white);display:flex;align-items:center;gap:20px;flex-wrap:wrap;">
     <div style="display:flex;align-items:center;gap:10px;flex:1;min-width:0;">
-      <div id="ia-ctx-avatar" style="width:36px;height:36px;border-radius:50%;background:var(--green);display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:13px;flex-shrink:0;">JP</div>
-      <div style="min-width:0;">
-        <div style="display:flex;align-items:center;gap:6px;">
-          <span style="font-size:11px;color:var(--text-muted);">Cliente ativo</span>
-          <span style="width:6px;height:6px;border-radius:50%;background:var(--green);display:inline-block;"></span>
-        </div>
-        <div id="ia-ctx-name" style="font-size:14px;font-weight:700;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">João Paulo</div>
-      </div>
-      <div style="width:1px;height:32px;background:var(--border);margin:0 4px;"></div>
-      <div style="min-width:0;">
-        <div style="font-size:10px;color:var(--text-muted);">Objetivo</div>
-        <div id="ia-ctx-obj" style="font-size:13px;font-weight:500;color:var(--text);">—</div>
-      </div>
-      <div style="width:1px;height:32px;background:var(--border);margin:0 4px;"></div>
-      <div style="min-width:0;">
-        <div style="font-size:10px;color:var(--text-muted);">Observações</div>
-        <div id="ia-ctx-obs" style="font-size:13px;font-weight:500;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:180px;">—</div>
-      </div>
-      <div style="width:1px;height:32px;background:var(--border);margin:0 4px;"></div>
+      <div id="ia-avatar" style="width:36px;height:36px;border-radius:50%;background:var(--green);display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:13px;flex-shrink:0;">JP</div>
       <div>
-        <div style="font-size:10px;color:var(--text-muted);">Frequência</div>
-        <div id="ia-ctx-freq" style="font-size:13px;font-weight:500;color:var(--text);">—</div>
+        <div style="font-size:10px;color:var(--text-muted);">Cliente ativo</div>
+        <div id="ia-client-name" style="font-size:14px;font-weight:700;color:var(--text);display:flex;align-items:center;gap:6px;">João Paulo <span style="width:7px;height:7px;border-radius:50%;background:var(--green);display:inline-block;"></span></div>
       </div>
+      <div style="width:1px;height:32px;background:var(--border);margin:0 8px;"></div>
+      <div><div style="font-size:10px;color:var(--text-muted);">Objetivo</div><div id="ia-client-obj" style="font-size:13px;font-weight:500;">—</div></div>
+      <div style="width:1px;height:32px;background:var(--border);margin:0 8px;"></div>
+      <div style="max-width:200px;min-width:0;"><div style="font-size:10px;color:var(--text-muted);">Observações</div><div id="ia-client-obs" style="font-size:13px;font-weight:500;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">—</div></div>
+      <div style="width:1px;height:32px;background:var(--border);margin:0 8px;"></div>
+      <div><div style="font-size:10px;color:var(--text-muted);">Frequência</div><div id="ia-client-freq" style="font-size:13px;font-weight:500;">—</div></div>
     </div>
     <div style="display:flex;gap:8px;flex-shrink:0;">
-      <button onclick="openDrawer(window.globalCliente||'joao')" style="padding:7px 14px;background:transparent;border:1px solid var(--border);border-radius:8px;font-size:11px;font-weight:500;color:var(--text);cursor:pointer;display:flex;align-items:center;gap:5px;transition:.15s;" onmouseover="this.style.borderColor='var(--green)';this.style.color='var(--green)'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--text)'">⇄ Trocar cliente</button>
-      <button onclick="sendChat('Faça uma análise completa do perfil do cliente ativo incluindo objetivo, observações, riscos e sugestões de treino')" style="padding:7px 14px;background:var(--green);border:none;border-radius:8px;font-size:11px;font-weight:600;color:white;cursor:pointer;display:flex;align-items:center;gap:5px;transition:.15s;" onmouseover="this.style.background='#0D7A5A'" onmouseout="this.style.background='var(--green)'">🤖 Analisar cliente</button>
+      <button onclick="openDrawer(window.globalCliente||'joao')" style="padding:7px 14px;border:1px solid var(--border);border-radius:8px;background:transparent;font-size:12px;font-weight:500;cursor:pointer;color:var(--text);">⇄ Trocar cliente</button>
+      <button onclick="sendChat('Faça uma análise completa do perfil do cliente ativo: objetivo, condições, riscos e sugestões de treino')" style="padding:7px 14px;border:none;border-radius:8px;background:var(--green);color:white;font-size:12px;font-weight:600;cursor:pointer;">🤖 Analisar cliente</button>
     </div>
   </div>
 
-  <!-- ══ ÁREA DE MENSAGENS ══ -->
-  <div id="chat-messages" style="flex:1;overflow-y:auto;padding:28px 0;display:flex;flex-direction:column;gap:24px;scroll-behavior:smooth;">
-
-    <!-- Welcome message -->
-    <div class="ia-msg-row ia-msg-ai" style="display:flex;gap:12px;padding:0 24px;max-width:860px;margin:0 auto;width:100%;box-sizing:border-box;">
-      <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--green) 0%,#0a6b4a 100%);display:flex;align-items:center;justify-content:center;color:white;font-size:15px;flex-shrink:0;box-shadow:0 2px 8px rgba(29,158,117,.3);">🤖</div>
-      <div style="flex:1;min-width:0;">
-        <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
-          <span style="font-size:13px;font-weight:700;color:var(--text);">NERAS IA</span>
-          <span style="font-size:11px;color:var(--text-muted);" id="ia-welcome-time"></span>
-        </div>
+  <!-- MENSAGENS -->
+  <div id="chat-messages" style="flex:1;overflow-y:auto;padding:24px;display:flex;flex-direction:column;gap:20px;">
+    <!-- Boas-vindas -->
+    <div style="display:flex;gap:12px;max-width:820px;width:100%;margin:0 auto;box-sizing:border-box;">
+      <div style="width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,var(--green),#0a6b4a);display:flex;align-items:center;justify-content:center;color:white;font-size:16px;flex-shrink:0;">🤖</div>
+      <div style="flex:1;">
+        <div style="font-size:13px;font-weight:700;margin-bottom:4px;">NERAS IA <span style="font-weight:400;color:var(--text-muted);font-size:11px;" id="ia-welcome-time"></span></div>
         <div style="font-size:14px;line-height:1.7;color:var(--text);">
           Olá! Sou o assistente científico do <strong>N.E.R.A.S Performance</strong>.<br>
           Posso ajudar com análises baseadas em evidências sobre prescrição de exercícios, periodização, adaptações para condições especiais e muito mais.
         </div>
         <!-- Chips iniciais -->
-        <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:16px;" id="ia-welcome-chips">
-          <button onclick="sendChat('Faça uma análise completa do perfil do cliente ativo incluindo objetivo, observações, riscos e sugestões de treino')" class="ia-chip">🏋️ Analisar cliente</button>
-          <button onclick="sendChat('Crie uma progressão de treino para as próximas 4 semanas para o cliente ativo')" class="ia-chip">📈 Criar progressão</button>
-          <button onclick="sendChat('Avalie os principais riscos e contraindicações para o cliente ativo com base nas observações')" class="ia-chip">⚠ Avaliar riscos</button>
-          <button onclick="sendChat('Busque evidências científicas sobre o objetivo principal do cliente ativo')" class="ia-chip">🔬 Buscar evidências</button>
-          <button onclick="sendChat('Sugira os melhores exercícios para o objetivo e condições do cliente ativo')" class="ia-chip">💪 Sugerir exercícios</button>
-          <button onclick="sendChat('Monte uma estratégia de treino completa para o cliente ativo considerando frequência, volume e intensidade')" class="ia-chip">🎯 Estratégia de treino</button>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:16px;">
+          <button onclick="sendChat('Faça uma análise completa do perfil do cliente ativo: objetivo, condições, riscos e sugestões de treino')" style="padding:7px 14px;border-radius:20px;border:1px solid var(--border);background:var(--white);color:var(--text);font-size:12px;cursor:pointer;font-family:inherit;transition:.15s;" onmouseover="this.style.borderColor='var(--green)';this.style.color='var(--green)'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--text)'">🏋️ Analisar cliente</button>
+          <button onclick="sendChat('Crie uma progressão de treino para as próximas 4 semanas para o cliente ativo')" style="padding:7px 14px;border-radius:20px;border:1px solid var(--border);background:var(--white);color:var(--text);font-size:12px;cursor:pointer;font-family:inherit;transition:.15s;" onmouseover="this.style.borderColor='var(--green)';this.style.color='var(--green)'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--text)'">📈 Criar progressão</button>
+          <button onclick="sendChat('Avalie os principais riscos e contraindicações para o cliente ativo com base nas observações')" style="padding:7px 14px;border-radius:20px;border:1px solid var(--border);background:var(--white);color:var(--text);font-size:12px;cursor:pointer;font-family:inherit;transition:.15s;" onmouseover="this.style.borderColor='var(--green)';this.style.color='var(--green)'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--text)'">⚠ Avaliar riscos</button>
+          <button onclick="sendChat('Busque evidências científicas sobre o objetivo principal do cliente ativo')" style="padding:7px 14px;border-radius:20px;border:1px solid var(--border);background:var(--white);color:var(--text);font-size:12px;cursor:pointer;font-family:inherit;transition:.15s;" onmouseover="this.style.borderColor='var(--green)';this.style.color='var(--green)'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--text)'">🔬 Buscar evidências</button>
+          <button onclick="sendChat('Sugira os melhores exercícios para o objetivo e condições do cliente ativo')" style="padding:7px 14px;border-radius:20px;border:1px solid var(--border);background:var(--white);color:var(--text);font-size:12px;cursor:pointer;font-family:inherit;transition:.15s;" onmouseover="this.style.borderColor='var(--green)';this.style.color='var(--green)'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--text)'">💪 Sugerir exercícios</button>
+          <button onclick="sendChat('Monte uma estratégia de treino completa para o cliente ativo considerando frequência, volume e intensidade')" style="padding:7px 14px;border-radius:20px;border:1px solid var(--border);background:var(--white);color:var(--text);font-size:12px;cursor:pointer;font-family:inherit;transition:.15s;" onmouseover="this.style.borderColor='var(--green)';this.style.color='var(--green)'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--text)'">🎯 Estratégia de treino</button>
         </div>
       </div>
     </div>
-
   </div>
 
-  <!-- ══ INPUT AREA ══ -->
-  <div style="flex-shrink:0;border-top:1px solid var(--border);background:var(--bg-card);padding:16px 24px 14px;">
-
-    <!-- Textarea + Send -->
-    <div style="max-width:860px;margin:0 auto;">
-      <div style="position:relative;border:1px solid var(--border);border-radius:14px;background:var(--bg);transition:border-color .2s;display:flex;align-items:flex-end;gap:0;" id="ia-input-wrapper">
-        <textarea id="chat-input"
-          placeholder="Pergunte sobre treino, lesões, biomecânica, hipertrofia, reabilitação ou evidências científicas..."
-          style="flex:1;padding:14px 16px;background:transparent;border:none;outline:none;color:var(--text);font-size:14px;resize:none;font-family:inherit;min-height:52px;max-height:160px;line-height:1.6;"
-          oninput="this.style.height='auto';this.style.height=Math.min(this.scrollHeight,160)+'px'"
-          onfocus="document.getElementById('ia-input-wrapper').style.borderColor='var(--green)'"
-          onblur="document.getElementById('ia-input-wrapper').style.borderColor='var(--border)'"
-          onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendChat()}"></textarea>
-        <button onclick="sendChat()" id="ia-send-btn"
-          style="width:44px;height:44px;margin:6px 8px 6px 0;border-radius:10px;background:var(--green);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background .15s;"
-          onmouseover="this.style.background='#0D7A5A'" onmouseout="this.style.background='var(--green)'">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+  <!-- INPUT -->
+  <div style="flex-shrink:0;border-top:1px solid var(--border);background:var(--white);padding:16px 24px 12px;">
+    <div style="max-width:820px;margin:0 auto;">
+      <div style="border:1px solid var(--border);border-radius:14px;background:var(--bg);display:flex;align-items:flex-end;gap:0;transition:border-color .2s;" id="ia-input-box">
+        <textarea id="chat-input" placeholder="Pergunte sobre treino, lesões, biomecânica, hipertrofia, reabilitação ou evidências científicas..." style="flex:1;padding:14px 16px;background:transparent;border:none;outline:none;color:var(--text);font-size:14px;resize:none;font-family:inherit;min-height:52px;max-height:140px;line-height:1.6;" oninput="this.style.height='auto';this.style.height=Math.min(this.scrollHeight,140)+'px'" onfocus="document.getElementById('ia-input-box').style.borderColor='var(--green)'" onblur="document.getElementById('ia-input-box').style.borderColor='var(--border)'" onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendChat()}"></textarea>
+        <button onclick="sendChat()" style="width:42px;height:42px;margin:6px 8px 6px 0;border-radius:10px;background:var(--green);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;" onmouseover="this.style.background='#0a6b4a'" onmouseout="this.style.background='var(--green)'">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
         </button>
       </div>
-
-      <!-- Quick action chips below input -->
+      <!-- Chips rápidos -->
       <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:10px;align-items:center;">
-        <span style="font-size:10px;color:var(--text-muted);margin-right:2px;">⚡</span>
-        <button onclick="sendChat('Faça uma análise completa do perfil do cliente ativo incluindo objetivo, observações, riscos e sugestões de treino')" class="ia-action-chip">Analisar cliente</button>
-        <button onclick="sendChat('Avalie os principais riscos e contraindicações para o cliente ativo')" class="ia-action-chip">Avaliar riscos</button>
-        <button onclick="sendChat('Crie uma progressão de treino para as próximas 4 semanas para o cliente ativo')" class="ia-action-chip">Criar progressão</button>
-        <button onclick="sendChat('Busque evidências científicas sobre o objetivo principal do cliente ativo')" class="ia-action-chip">Buscar evidências</button>
-        <button onclick="sendChat('Sugira os melhores exercícios para o objetivo e condições do cliente ativo')" class="ia-action-chip">Sugerir exercícios</button>
-        <button onclick="sendChat('Monte uma estratégia de treino completa considerando frequência, volume e intensidade')" class="ia-action-chip">Montar estratégia</button>
-        <button onclick="clearIAChat()" style="margin-left:auto;font-size:11px;padding:4px 10px;border-radius:8px;border:1px solid var(--border);background:transparent;color:var(--text-muted);cursor:pointer;" title="Limpar conversa">🗑</button>
+        <span style="font-size:10px;color:var(--text-muted);">⚡</span>
+        <button onclick="sendChat('Faça uma análise completa do perfil do cliente ativo: objetivo, condições, riscos e sugestões de treino')" style="padding:4px 12px;border-radius:20px;border:1px solid var(--border);background:transparent;color:var(--text-muted);font-size:11px;cursor:pointer;font-family:inherit;" onmouseover="this.style.borderColor='var(--green)';this.style.color='var(--green)'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--text-muted)'">Analisar cliente</button>
+        <button onclick="sendChat('Avalie os principais riscos e contraindicações para o cliente ativo')" style="padding:4px 12px;border-radius:20px;border:1px solid var(--border);background:transparent;color:var(--text-muted);font-size:11px;cursor:pointer;font-family:inherit;" onmouseover="this.style.borderColor='var(--green)';this.style.color='var(--green)'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--text-muted)'">Avaliar riscos</button>
+        <button onclick="sendChat('Crie uma progressão de treino para as próximas 4 semanas')" style="padding:4px 12px;border-radius:20px;border:1px solid var(--border);background:transparent;color:var(--text-muted);font-size:11px;cursor:pointer;font-family:inherit;" onmouseover="this.style.borderColor='var(--green)';this.style.color='var(--green)'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--text-muted)'">Criar progressão</button>
+        <button onclick="sendChat('Busque evidências científicas sobre o objetivo principal do cliente ativo')" style="padding:4px 12px;border-radius:20px;border:1px solid var(--border);background:transparent;color:var(--text-muted);font-size:11px;cursor:pointer;font-family:inherit;" onmouseover="this.style.borderColor='var(--green)';this.style.color='var(--green)'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--text-muted)'">Buscar evidências</button>
+        <button onclick="sendChat('Sugira os melhores exercícios para o objetivo e condições do cliente ativo')" style="padding:4px 12px;border-radius:20px;border:1px solid var(--border);background:transparent;color:var(--text-muted);font-size:11px;cursor:pointer;font-family:inherit;" onmouseover="this.style.borderColor='var(--green)';this.style.color='var(--green)'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--text-muted)'">Sugerir exercícios</button>
+        <button onclick="sendChat('Monte uma estratégia de treino completa considerando frequência, volume e intensidade')" style="padding:4px 12px;border-radius:20px;border:1px solid var(--border);background:transparent;color:var(--text-muted);font-size:11px;cursor:pointer;font-family:inherit;" onmouseover="this.style.borderColor='var(--green)';this.style.color='var(--green)'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--text-muted)'">Montar estratégia</button>
       </div>
       <div style="text-align:center;margin-top:8px;font-size:10px;color:var(--text-muted);">Enter para enviar · Shift+Enter para nova linha · Powered by Claude (Anthropic)</div>
     </div>
   </div>
 
+</div>
 
-    <!-- MODAL EXERCÍCIO -->
+<!-- MODAL EXERCÍCIO -->
     <div id="ex-modal-overlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:300;align-items:center;justify-content:center;">
       <div id="ex-modal" style="background:white;border-radius:16px;width:640px;max-height:85vh;overflow-y:auto;padding:28px;position:relative;box-shadow:0 20px 60px rgba(0,0,0,0.2);">
         <button onclick="closeExModal()" style="position:absolute;top:16px;right:16px;width:32px;height:32px;border-radius:8px;border:1px solid var(--border);background:transparent;cursor:pointer;font-size:16px;color:var(--text-muted);">✕</button>
@@ -3311,9 +3105,9 @@
     </div>
 
 
+  
   <!-- ═══════════════ CENTRO DE EVIDÊNCIAS ═══════════════ -->
   <div id="page-pesquisa" class="page">
-    <!-- HERO -->
     <div class="research-hero" style="margin-bottom:20px;">
       <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;">
         <div>
@@ -3322,21 +3116,17 @@
         </div>
         <div style="display:flex;gap:8px;">
           <button id="tab-explorar" onclick="switchResearchTab('explorar')" style="padding:8px 18px;border-radius:10px;border:none;background:var(--green);color:white;font-size:12px;font-weight:600;cursor:pointer;">🔍 Explorar</button>
-          <button id="tab-salvos"   onclick="switchResearchTab('salvos')"   style="padding:8px 18px;border-radius:10px;border:1px solid var(--border);background:transparent;color:var(--text-muted);font-size:12px;cursor:pointer;">📁 Salvos</button>
+          <button id="tab-salvos" onclick="switchResearchTab('salvos')" style="padding:8px 18px;border-radius:10px;border:1px solid var(--border);background:transparent;color:var(--text-muted);font-size:12px;cursor:pointer;">📁 Salvos</button>
         </div>
       </div>
-      <!-- Search bar -->
       <div style="margin-top:16px;display:flex;gap:10px;">
         <input id="research-query" type="text" placeholder="Buscar artigos: hipertrofia, lombar, TDAH, gestante..." style="flex:1;padding:11px 16px;border-radius:10px;border:1px solid var(--border);background:var(--bg);color:var(--text);font-size:13px;outline:none;" onfocus="this.style.borderColor='var(--green)'" onblur="this.style.borderColor='var(--border)'" onkeydown="if(event.key==='Enter') searchResearch()">
         <button onclick="searchResearch()" style="padding:11px 20px;background:var(--green);color:white;border:none;border-radius:10px;font-size:13px;font-weight:600;cursor:pointer;">Buscar</button>
       </div>
     </div>
 
-    <!-- TAB: EXPLORAR -->
     <div id="tab-content-explorar">
       <div id="evidencias-contexto" style="margin-bottom:16px;"></div>
-
-      <!-- Article 1 -->
       <div class="article-card">
         <div class="article-header">
           <div>
@@ -3347,15 +3137,13 @@
             <span class="ev-dot fill"></span><span class="ev-dot fill"></span><span class="ev-dot fill"></span><span class="ev-dot fill"></span><span class="ev-dot"></span>
           </div>
         </div>
-        <div class="article-abstract">10–20 séries por músculo por semana maximiza a hipertrofia na maioria dos praticantes. Progressão de volume de 2–5% por semana é o protocolo ótimo baseado em evidências.</div>
+        <div class="article-abstract">10–20 séries por músculo por semana maximiza a hipertrofia. Progressão de volume de 2–5% por semana é o protocolo ótimo.</div>
         <div style="display:flex;gap:6px;margin-top:10px;flex-wrap:wrap;">
           <span class="badge badge-blue">Hipertrofia</span><span class="badge badge-gray">Volume</span><span class="badge badge-green">Meta-análise</span>
           <button class="article-action-btn" onclick="usarArtigoNoTreino(1)" style="margin-left:auto;">🏋️ Usar no Treino</button>
           <button class="article-action-btn" onclick="saveArticle(1,this)">📁 Salvar</button>
         </div>
       </div>
-
-      <!-- Article 2 -->
       <div class="article-card">
         <div class="article-header">
           <div>
@@ -3366,15 +3154,13 @@
             <span class="ev-dot fill"></span><span class="ev-dot fill"></span><span class="ev-dot fill"></span><span class="ev-dot"></span><span class="ev-dot"></span>
           </div>
         </div>
-        <div class="article-abstract">Exercício aeróbio agudo melhora atenção e função executiva em indivíduos com TDAH. Sessões de 20–30min antes de atividades cognitivas produzem os maiores benefícios.</div>
+        <div class="article-abstract">Exercício aeróbio agudo melhora atenção e função executiva em indivíduos com TDAH. Sessões de 20–30min produzem os maiores benefícios.</div>
         <div style="display:flex;gap:6px;margin-top:10px;flex-wrap:wrap;">
           <span class="badge badge-purple">TDAH</span><span class="badge badge-blue">Cognição</span><span class="badge badge-gray">RCT</span>
           <button class="article-action-btn" onclick="usarArtigoNoTreino(2)" style="margin-left:auto;">🏋️ Usar no Treino</button>
           <button class="article-action-btn" onclick="saveArticle(2,this)">📁 Salvar</button>
         </div>
       </div>
-
-      <!-- Article 3 -->
       <div class="article-card">
         <div class="article-header">
           <div>
@@ -3385,15 +3171,13 @@
             <span class="ev-dot fill"></span><span class="ev-dot fill"></span><span class="ev-dot fill"></span><span class="ev-dot fill"></span><span class="ev-dot fill"></span>
           </div>
         </div>
-        <div class="article-abstract">Critérios funcionais (limb symmetry index >90%) são melhores preditores de segurança no retorno ao esporte do que critérios baseados em tempo após reconstrução de LCA.</div>
+        <div class="article-abstract">Critérios funcionais (limb symmetry index >90%) são melhores preditores de segurança no retorno ao esporte do que critérios baseados em tempo.</div>
         <div style="display:flex;gap:6px;margin-top:10px;flex-wrap:wrap;">
           <span class="badge badge-red">Reabilitação</span><span class="badge badge-amber">LCA</span><span class="badge badge-green">Revisão Sistemática</span>
           <button class="article-action-btn" onclick="usarArtigoNoTreino(3)" style="margin-left:auto;">🏋️ Usar no Treino</button>
           <button class="article-action-btn" onclick="saveArticle(3,this)">📁 Salvar</button>
         </div>
       </div>
-
-      <!-- Article 4 -->
       <div class="article-card">
         <div class="article-header">
           <div>
@@ -3404,7 +3188,7 @@
             <span class="ev-dot fill"></span><span class="ev-dot fill"></span><span class="ev-dot fill"></span><span class="ev-dot fill"></span><span class="ev-dot"></span>
           </div>
         </div>
-        <div class="article-abstract">150min/semana de atividade moderada é seguro e benéfico durante toda a gestação sem complicações. Exercícios de força também são recomendados com adaptações adequadas.</div>
+        <div class="article-abstract">150min/semana de atividade moderada é seguro durante toda a gestação sem complicações. Exercícios de força também são recomendados.</div>
         <div style="display:flex;gap:6px;margin-top:10px;flex-wrap:wrap;">
           <span class="badge badge-purple">Gestante</span><span class="badge badge-green">Diretrizes ACOG</span>
           <button class="article-action-btn" onclick="usarArtigoNoTreino(4)" style="margin-left:auto;">🏋️ Usar no Treino</button>
@@ -3413,34 +3197,28 @@
       </div>
     </div>
 
-    <!-- TAB: SALVOS -->
     <div id="tab-content-salvos" style="display:none;">
-      <div style="display:flex;gap:16px;">
-        <!-- Folder list -->
-        <div style="width:200px;flex-shrink:0;">
-          <div style="font-size:11px;font-weight:700;color:var(--text-muted);margin-bottom:10px;text-transform:uppercase;letter-spacing:.06em;">Pastas</div>
+      <div style="display:flex;gap:16px;flex-wrap:wrap;">
+        <div style="min-width:160px;">
+          <div style="font-size:11px;font-weight:700;color:var(--text-muted);margin-bottom:10px;text-transform:uppercase;">Pastas</div>
           <div id="folder-list"></div>
         </div>
-        <!-- Saved articles -->
-        <div style="flex:1;">
-          <div id="saved-folder-title" style="font-size:16px;font-weight:700;margin-bottom:4px;">Todos os salvos</div>
+        <div style="flex:1;min-width:200px;">
+          <div id="saved-folder-title" style="font-size:16px;font-weight:700;margin-bottom:4px;">Salvos</div>
           <div id="saved-folder-subtitle" style="font-size:12px;color:var(--text-muted);margin-bottom:16px;"></div>
           <div id="saved-articles-list"></div>
           <div id="saved-empty" style="display:none;text-align:center;padding:40px;color:var(--text-muted);">
             <div style="font-size:32px;margin-bottom:10px;">📁</div>
-            <div style="font-size:14px;">Nenhum artigo salvo ainda.</div>
-            <div style="font-size:12px;margin-top:6px;">Salve artigos na aba Explorar para vê-los aqui.</div>
+            <div>Nenhum artigo salvo ainda.</div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- Modais -->
     <div id="folder-picker-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:400;align-items:center;justify-content:center;">
-      <div style="background:var(--bg-card);border-radius:16px;width:400px;max-width:95vw;padding:24px;box-shadow:0 20px 60px rgba(0,0,0,.3);">
-        <div style="font-size:15px;font-weight:700;margin-bottom:4px;">Salvar artigo</div>
-        <div id="folder-picker-article-name" style="font-size:12px;color:var(--text-muted);margin-bottom:16px;"></div>
-        <div id="folder-picker-list" style="display:flex;flex-direction:column;gap:8px;margin-bottom:16px;max-height:200px;overflow-y:auto;"></div>
+      <div style="background:var(--bg-card);border-radius:16px;width:400px;max-width:95vw;padding:24px;">
+        <div style="font-size:15px;font-weight:700;margin-bottom:16px;">Salvar artigo</div>
+        <div id="folder-picker-list" style="display:flex;flex-direction:column;gap:8px;margin-bottom:16px;"></div>
         <div style="display:flex;gap:8px;">
           <button onclick="confirmSaveToFolder()" style="flex:1;padding:10px;background:var(--green);color:white;border:none;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;">Salvar</button>
           <button onclick="document.getElementById('folder-picker-modal').style.display='none'" style="padding:10px 16px;border:1px solid var(--border);border-radius:8px;font-size:13px;cursor:pointer;background:transparent;color:var(--text-muted);">Cancelar</button>
@@ -3448,15 +3226,14 @@
       </div>
     </div>
     <div id="resume-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:400;align-items:center;justify-content:center;">
-      <div style="background:var(--bg-card);border-radius:16px;width:600px;max-width:95vw;max-height:85vh;overflow-y:auto;padding:24px;box-shadow:0 20px 60px rgba(0,0,0,.3);position:relative;">
+      <div style="background:var(--bg-card);border-radius:16px;width:600px;max-width:95vw;max-height:85vh;overflow-y:auto;padding:24px;position:relative;">
         <button onclick="document.getElementById('resume-modal').style.display='none'" style="position:absolute;top:14px;right:14px;background:none;border:none;font-size:18px;cursor:pointer;color:var(--text-muted);">✕</button>
         <div id="resume-modal-content"></div>
       </div>
     </div>
   </div>
 
-
-  <!-- ═══════════════ CENTRO DE CONHECIMENTO ═══════════════ -->
+<!-- ═══════════════ CENTRO DE CONHECIMENTO ═══════════════ -->
   <div id="page-conhecimento" class="page">
 
     <!-- HEADER -->
@@ -3477,10 +3254,6 @@
       <button id="ck-tab-protocolos" onclick="showCKTab('protocolos')" class="ck-tab" style="padding:8px 18px;border-radius:10px;border:1px solid var(--border);background:transparent;color:var(--text-muted);font-size:12px;cursor:pointer;">📋 Protocolos</button>
       <button id="ck-tab-favoritos" onclick="showCKTab('favoritos')" class="ck-tab" style="padding:8px 18px;border-radius:10px;border:1px solid var(--border);background:transparent;color:var(--text-muted);font-size:12px;cursor:pointer;">⭐ Favoritos</button>
       <button id="ck-tab-ia"        onclick="showCKTab('ia')"        class="ck-tab" style="padding:8px 18px;border-radius:10px;border:1px solid var(--border);background:transparent;color:var(--text-muted);font-size:12px;cursor:pointer;">🤖 IA Resumidora</button>
-      <button id="ck-tab-guias"     onclick="showCKTab('guias')"     class="ck-tab" style="padding:8px 18px;border-radius:10px;border:1px solid var(--border);background:transparent;color:var(--text-muted);font-size:12px;cursor:pointer;">⚡ Guias Rápidos</button>
-      <button id="ck-tab-casos"     onclick="showCKTab('casos')"     class="ck-tab" style="padding:8px 18px;border-radius:10px;border:1px solid var(--border);background:transparent;color:var(--text-muted);font-size:12px;cursor:pointer;">🩺 Casos Clínicos</button>
-      <button id="ck-tab-trilhas"   onclick="showCKTab('trilhas')"   class="ck-tab" style="padding:8px 18px;border-radius:10px;border:1px solid var(--border);background:transparent;color:var(--text-muted);font-size:12px;cursor:pointer;">🗺 Trilhas</button>
-      <button id="ck-tab-graph"     onclick="showCKTab('graph')"     class="ck-tab" style="padding:8px 18px;border-radius:10px;border:1px solid var(--border);background:transparent;color:var(--text-muted);font-size:12px;cursor:pointer;">🔗 Conexões</button>
     </div>
 
     <!-- TAB: LIVROS -->
@@ -3529,43 +3302,6 @@
       </div>
     </div>
 
-
-    <!-- TAB: GUIAS RÁPIDOS -->
-    <div id="ck-panel-guias" style="display:none;">
-      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;" id="ck-guides-grid"></div>
-    </div>
-
-    <!-- TAB: CASOS CLÍNICOS -->
-    <div id="ck-panel-casos" style="display:none;">
-      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px;" id="ck-cases-grid"></div>
-    </div>
-
-    <!-- TAB: TRILHAS -->
-    <div id="ck-panel-trilhas" style="display:none;">
-      <div id="ck-trilhas-content"></div>
-    </div>
-
-    <!-- TAB: CONEXÕES INTELIGENTES (KNOWLEDGE GRAPH) -->
-    <div id="ck-panel-graph" style="display:none;">
-      <div id="ck-graph-content"></div>
-    </div>
-
-    <!-- GUIDE DETAIL MODAL -->
-    <div id="ck-guide-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:400;align-items:center;justify-content:center;">
-      <div style="background:var(--bg-card);border-radius:18px;width:680px;max-width:95vw;max-height:90vh;overflow-y:auto;padding:30px;position:relative;margin:20px auto;box-shadow:0 20px 60px rgba(0,0,0,.3);">
-        <button onclick="document.getElementById('ck-guide-modal').style.display='none'" style="position:absolute;top:16px;right:16px;background:none;border:none;font-size:18px;cursor:pointer;color:var(--text-muted);">✕</button>
-        <div id="ck-guide-modal-content"></div>
-      </div>
-    </div>
-
-    <!-- USAR NO ATENDIMENTO MODAL -->
-    <div id="ck-atendimento-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:500;align-items:center;justify-content:center;">
-      <div style="background:var(--bg-card);border-radius:18px;width:600px;max-width:95vw;max-height:90vh;overflow-y:auto;padding:28px;position:relative;margin:20px auto;box-shadow:0 20px 60px rgba(0,0,0,.3);">
-        <button onclick="document.getElementById('ck-atendimento-modal').style.display='none'" style="position:absolute;top:14px;right:14px;background:none;border:none;font-size:18px;cursor:pointer;color:var(--text-muted);">✕</button>
-        <div id="ck-atendimento-content"></div>
-      </div>
-    </div>
-
     <!-- BOOK DETAIL MODAL -->
     <div id="ck-book-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:400;align-items:center;justify-content:center;overflow-y:auto;">
       <div style="background:var(--bg-card);border-radius:18px;width:680px;max-width:95vw;max-height:90vh;overflow-y:auto;padding:30px;position:relative;margin:20px auto;box-shadow:0 20px 60px rgba(0,0,0,.3);">
@@ -3584,6 +3320,290 @@
 
   </div>
 
+
+
+
+  <!-- ═══════════════ MODAL FICHA DE TREINO INTELIGENTE ═══════════════ -->
+  <div id="ficha-modal-overlay" style="display:none;position:fixed;inset:0;z-index:1000;overflow-y:auto;">
+    <div style="display:flex;min-height:100vh;">
+
+      <!-- SIDEBAR ESCURA -->
+      <div style="width:220px;flex-shrink:0;background:#1C1C1A;display:flex;flex-direction:column;position:sticky;top:0;height:100vh;">
+        <div style="padding:24px 20px 16px;">
+          <div style="font-family:'Space Mono',monospace;font-weight:700;font-size:15px;color:white;">N.E.R.A.S</div>
+          <div style="font-size:9px;color:rgba(255,255,255,.35);text-transform:uppercase;letter-spacing:.12em;">Performance</div>
+        </div>
+        <button onclick="document.getElementById('ficha-modal-overlay').style.display='none'" style="margin:0 20px 16px;background:transparent;border:none;color:rgba(255,255,255,.45);font-size:11px;cursor:pointer;text-align:left;padding:0;display:flex;align-items:center;gap:5px;">← Voltar para Treinos</button>
+        <div style="padding:0 12px;flex:1;overflow-y:auto;">
+          <div style="font-size:9px;color:rgba(255,255,255,.25);text-transform:uppercase;letter-spacing:.08em;padding:0 8px;margin-bottom:6px;">Principal</div>
+          <div style="padding:8px 12px;border-radius:8px;color:rgba(255,255,255,.45);font-size:12px;">📊 Dashboard</div>
+          <div style="padding:8px 12px;border-radius:8px;color:rgba(255,255,255,.45);font-size:12px;">👥 Clientes</div>
+          <div style="padding:8px 12px;border-radius:8px;color:rgba(255,255,255,.45);font-size:12px;">+ Cadastrar Cliente</div>
+          <div style="padding:8px 12px;border-radius:8px;color:rgba(255,255,255,.45);font-size:12px;">✕ Criar Treino</div>
+          <div style="font-size:9px;color:rgba(255,255,255,.25);text-transform:uppercase;letter-spacing:.08em;padding:0 8px;margin:12px 0 6px;">Recursos</div>
+          <div style="padding:8px 12px;border-radius:8px;color:rgba(255,255,255,.45);font-size:12px;">📚 Biblioteca</div>
+          <div style="padding:8px 12px;border-radius:8px;background:rgba(29,158,117,.25);color:white;font-size:12px;font-weight:600;">🤖 IA Assistente <span style="font-size:9px;padding:1px 6px;border-radius:8px;background:#1D9E75;margin-left:4px;">IA</span></div>
+          <div style="padding:8px 12px;border-radius:8px;color:rgba(255,255,255,.45);font-size:12px;">🔬 Centro de Evidências</div>
+          <div style="padding:8px 12px;border-radius:8px;color:rgba(255,255,255,.45);font-size:12px;">📖 Centro de Conhecimento</div>
+        </div>
+        <div style="padding:16px 20px;border-top:1px solid rgba(255,255,255,.08);display:flex;align-items:center;gap:10px;">
+          <div id="ficha-sb-avatar" style="width:32px;height:32px;border-radius:50%;background:#1D9E75;display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:11px;flex-shrink:0;">JP</div>
+          <div><div id="ficha-sb-name" style="font-size:12px;font-weight:600;color:white;">João Paulo</div><div style="font-size:10px;color:rgba(255,255,255,.35);">Personal Trainer</div></div>
+        </div>
+      </div>
+
+      <!-- MAIN CONTENT -->
+      <div style="flex:1;background:#f4f3ef;overflow-y:auto;min-height:100vh;">
+
+        <!-- TOPBAR -->
+        <div style="background:white;border-bottom:1px solid #e8e6e0;padding:14px 28px;display:flex;align-items:center;gap:16px;position:sticky;top:0;z-index:10;">
+          <div style="flex:1;">
+            <div style="display:flex;align-items:center;gap:10px;">
+              <div style="font-size:22px;font-weight:700;color:#1C1C1A;">Ficha de Treino</div>
+              <span style="font-size:10px;padding:3px 10px;border-radius:20px;background:#1D9E75;color:white;font-weight:600;letter-spacing:.04em;">ATIVA</span>
+            </div>
+            <div id="ficha-subtitle" style="font-size:12px;color:#888;margin-top:2px;">Treino — Musculação</div>
+          </div>
+          <div style="display:flex;gap:8px;">
+            <button style="padding:8px 14px;border-radius:8px;background:transparent;border:1px solid #d0cec7;color:#444;font-size:12px;cursor:pointer;display:flex;align-items:center;gap:5px;">✏ Editar Treino</button>
+            <button onclick="duplicarFicha()" style="padding:8px 14px;border-radius:8px;background:transparent;border:1px solid #d0cec7;color:#444;font-size:12px;cursor:pointer;display:flex;align-items:center;gap:5px;">🗂 Duplicar Ficha</button>
+            <button onclick="exportarFichaPDF()" style="padding:8px 18px;border-radius:8px;background:#1D9E75;border:none;color:white;font-size:12px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:5px;">⬇ Exportar PDF</button>
+          </div>
+        </div>
+
+        <!-- CONTENT -->
+        <div style="padding:24px 28px;max-width:1080px;">
+
+          <!-- CLIENT CARD -->
+          <div style="background:white;border-radius:12px;padding:18px 24px;margin-bottom:18px;border:1px solid #e8e6e0;">
+            <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;">
+              <div id="ficha-avatar" style="width:46px;height:46px;border-radius:50%;background:#1D9E75;display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:15px;flex-shrink:0;">JP</div>
+              <div>
+                <div style="font-size:10px;color:#aaa;text-transform:uppercase;letter-spacing:.06em;">Cliente</div>
+                <div id="ficha-client-name" style="font-size:17px;font-weight:700;display:flex;align-items:center;gap:6px;">— <span style="width:7px;height:7px;border-radius:50%;background:#1D9E75;display:inline-block;"></span></div>
+              </div>
+              <div style="display:flex;gap:28px;flex-wrap:wrap;margin-left:8px;flex:1;">
+                <div><div style="font-size:10px;color:#aaa;text-transform:uppercase;margin-bottom:2px;">Objetivo</div><div id="ficha-obj" style="font-size:13px;font-weight:600;">—</div></div>
+                <div><div style="font-size:10px;color:#aaa;text-transform:uppercase;margin-bottom:2px;">Frequência</div><div id="ficha-freq" style="font-size:13px;font-weight:600;">—</div></div>
+                <div><div style="font-size:10px;color:#aaa;text-transform:uppercase;margin-bottom:2px;">Tempo médio</div><div style="font-size:13px;font-weight:600;">60 – 70 min</div></div>
+                <div><div style="font-size:10px;color:#aaa;text-transform:uppercase;margin-bottom:2px;">Modalidade</div><div id="ficha-modal-label" style="font-size:13px;font-weight:600;">—</div></div>
+                <div><div style="font-size:10px;color:#aaa;text-transform:uppercase;margin-bottom:2px;">Data de criação</div><div id="ficha-date" style="font-size:13px;font-weight:600;">—</div></div>
+                <div><div style="font-size:10px;color:#aaa;text-transform:uppercase;margin-bottom:2px;">Última atualização</div><div id="ficha-update" style="font-size:13px;font-weight:600;">—</div></div>
+              </div>
+              <!-- Hidden data elements for JS compatibility -->
+              <span id="ficha-ex-count" style="display:none;"></span>
+              <span id="ficha-muscles" style="display:none;"></span>
+              <span id="ficha-update" style="display:none;"></span>
+              <span id="ficha-adherence" style="display:none;"></span>
+              <span id="ficha-freq-ideal" style="display:none;"></span>
+              <circle id="ficha-freq-circle" style="display:none;"></circle>
+              <div id="ficha-alternatives" style="display:none;"></div>
+              <div id="ficha-ia-summary" style="display:none;"></div>
+            </div>
+          </div>
+
+          <!-- BLOCO 1: Análise do Perfil + Técnicas -->
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;">
+            <div style="background:white;border-radius:12px;padding:20px 24px;border:1px solid #e8e6e0;">
+              <div style="display:flex;align-items:center;gap:8px;margin-bottom:16px;">
+                <div style="width:22px;height:22px;border-radius:50%;background:#1D9E75;display:flex;align-items:center;justify-content:center;color:white;font-size:11px;font-weight:700;">1</div>
+                <div style="font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;">Análise do Perfil</div>
+              </div>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:0;">
+                <div id="ficha-perfil-table" style="font-size:12px;"></div>
+                <div style="margin-left:16px;">
+                  <div style="background:#f0fdf4;border-radius:10px;padding:14px;border:1px solid rgba(29,158,117,.2);margin-bottom:12px;">
+                    <div style="font-size:11px;font-weight:700;color:#1D9E75;margin-bottom:8px;">ANÁLISE NERAS</div>
+                    <div id="ficha-analise-neras" style="font-size:11px;color:#333;line-height:1.6;"></div>
+                    <div style="margin-top:10px;font-size:10px;color:#888;">Classificação:</div>
+                    <div style="margin-top:4px;display:inline-block;padding:4px 12px;border-radius:20px;border:2px solid #1D9E75;color:#1D9E75;font-size:11px;font-weight:700;">ALTO POTENCIAL</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div style="background:white;border-radius:12px;padding:20px 24px;border:1px solid #e8e6e0;">
+              <div style="display:flex;align-items:center;gap:8px;margin-bottom:16px;">
+                <div style="width:22px;height:22px;border-radius:50%;background:#1D9E75;display:flex;align-items:center;justify-content:center;color:white;font-size:11px;font-weight:700;">2</div>
+                <div id="ficha-tecnicas-titulo" style="font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;">Técnicas Selecionadas</div>
+              </div>
+              <div id="ficha-tecnicas-list" style="display:flex;flex-direction:column;gap:10px;font-size:12px;"></div>
+            </div>
+          </div>
+
+          <!-- BLOCO 3: Volume Semanal -->
+          <div style="background:white;border-radius:12px;padding:20px 24px;margin-bottom:16px;border:1px solid #e8e6e0;">
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:16px;">
+              <div style="width:22px;height:22px;border-radius:50%;background:#1D9E75;display:flex;align-items:center;justify-content:center;color:white;font-size:11px;font-weight:700;">3</div>
+              <div style="font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;">Volume Semanal por Grupo Muscular</div>
+            </div>
+            <table style="width:100%;border-collapse:collapse;font-size:12px;">
+              <thead>
+                <tr style="border-bottom:2px solid #f0eeea;">
+                  <th style="text-align:left;padding:8px;color:#aaa;font-weight:600;font-size:10px;text-transform:uppercase;width:20%;">Grupo Muscular</th>
+                  <th style="text-align:center;padding:8px;color:#aaa;font-weight:600;font-size:10px;text-transform:uppercase;">Séries Semanais</th>
+                  <th style="text-align:center;padding:8px;color:#aaa;font-weight:600;font-size:10px;text-transform:uppercase;">Volume Ideal</th>
+                  <th style="text-align:center;padding:8px;color:#aaa;font-weight:600;font-size:10px;text-transform:uppercase;">Status</th>
+                  <th style="text-align:left;padding:8px;color:#aaa;font-weight:600;font-size:10px;text-transform:uppercase;width:30%;">Distribuição</th>
+                </tr>
+              </thead>
+              <tbody id="ficha-volume-tbody"></tbody>
+            </table>
+            <div style="display:flex;gap:16px;margin-top:12px;font-size:10px;color:#888;align-items:center;">
+              <span>Legenda:</span>
+              <span style="display:flex;align-items:center;gap:4px;"><span style="width:8px;height:8px;border-radius:50%;background:#EF4444;display:inline-block;"></span>Baixo</span>
+              <span style="display:flex;align-items:center;gap:4px;"><span style="width:8px;height:8px;border-radius:50%;background:#F59E0B;display:inline-block;"></span>Abaixo do ideal</span>
+              <span style="display:flex;align-items:center;gap:4px;"><span style="width:8px;height:8px;border-radius:50%;background:#1D9E75;display:inline-block;"></span>Adequado</span>
+              <span style="display:flex;align-items:center;gap:4px;"><span style="width:8px;height:8px;border-radius:50%;background:#3B82F6;display:inline-block;"></span>Acima do ideal</span>
+            </div>
+          </div>
+
+          <!-- BLOCO 4+5: Protocolo Divisão + Ajuste Frequência -->
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;">
+            <div style="background:white;border-radius:12px;padding:20px 24px;border:1px solid #e8e6e0;">
+              <div style="display:flex;align-items:center;gap:8px;margin-bottom:16px;">
+                <div style="width:22px;height:22px;border-radius:50%;background:#1D9E75;display:flex;align-items:center;justify-content:center;color:white;font-size:11px;font-weight:700;">4</div>
+                <div style="font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;" id="ficha-divisao-title">Protocolo de Divisão</div>
+              </div>
+              <div id="ficha-divisao" style="display:grid;grid-template-columns:repeat(2,1fr);gap:12px;font-size:12px;"></div>
+            </div>
+            <div style="background:white;border-radius:12px;padding:20px 24px;border:1px solid #e8e6e0;">
+              <div style="display:flex;align-items:center;gap:8px;margin-bottom:16px;">
+                <div style="width:22px;height:22px;border-radius:50%;background:#1D9E75;display:flex;align-items:center;justify-content:center;color:white;font-size:11px;font-weight:700;">5</div>
+                <div style="font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;">Ajuste de Frequência e Volume</div>
+              </div>
+              <table style="width:100%;border-collapse:collapse;font-size:11px;">
+                <thead><tr style="border-bottom:2px solid #f0eeea;"><th style="text-align:left;padding:6px 8px;color:#aaa;font-size:10px;font-weight:600;text-transform:uppercase;">Situação</th><th style="text-align:left;padding:6px 8px;color:#aaa;font-size:10px;font-weight:600;text-transform:uppercase;">Ajuste Recomendado</th></tr></thead>
+                <tbody>
+                  <tr style="border-bottom:1px solid #f5f3ef;"><td style="padding:8px;"><span style="color:#EF4444;">🔴</span> Se faltar 1 treino</td><td style="padding:8px;color:#555;">Manter volume e seguir no próximo treino. Não dobrar volume.</td></tr>
+                  <tr style="border-bottom:1px solid #f5f3ef;"><td style="padding:8px;"><span style="color:#F59E0B;">🟡</span> Se faltar 2 treinos</td><td style="padding:8px;color:#555;">Reduzir 20% do volume total da semana seguinte.</td></tr>
+                  <tr style="border-bottom:1px solid #f5f3ef;"><td style="padding:8px;"><span style="color:#EF4444;">⚠</span> Se sentir fadiga</td><td style="padding:8px;color:#555;">Reduzir 10–20% do volume e priorizar compostos.</td></tr>
+                  <tr style="border-bottom:1px solid #f5f3ef;"><td style="padding:8px;"><span style="color:#EF4444;">🚨</span> Se sentir dor</td><td style="padding:8px;color:#555;">Interromper e substituir por variação segura.</td></tr>
+                  <tr><td style="padding:8px;"><span style="color:#1D9E75;">🚀</span> Se evoluindo bem</td><td style="padding:8px;color:#555;">Aumentar 5–10% de carga ou 1–2 repetições.</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- BLOCO 6+7: Progressão + Métricas -->
+          <div style="display:grid;grid-template-columns:1.2fr 1fr;gap:16px;margin-bottom:16px;">
+            <div style="background:white;border-radius:12px;padding:20px 24px;border:1px solid #e8e6e0;">
+              <div style="display:flex;align-items:center;gap:8px;margin-bottom:16px;">
+                <div style="width:22px;height:22px;border-radius:50%;background:#1D9E75;display:flex;align-items:center;justify-content:center;color:white;font-size:11px;font-weight:700;">6</div>
+                <div style="font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;">Progressão (4 Semanas)</div>
+              </div>
+              <table style="width:100%;border-collapse:collapse;font-size:12px;">
+                <thead><tr id="ficha-progressao-header" style="border-bottom:2px solid #f0eeea;"><th style="padding:6px 8px;color:#aaa;font-size:10px;font-weight:600;"></th><th style="text-align:center;padding:6px 8px;color:#aaa;font-size:10px;">Sem. 1</th><th style="text-align:center;padding:6px 8px;color:#aaa;font-size:10px;">Sem. 2</th><th style="text-align:center;padding:6px 8px;color:#aaa;font-size:10px;">Sem. 3</th><th style="text-align:center;padding:6px 8px;color:#aaa;font-size:10px;">Sem. 4</th><th style="text-align:left;padding:6px 8px;color:#aaa;font-size:10px;">Foco</th></tr></thead>
+                <tbody id="ficha-progressao-tbody"></tbody>
+              </table>
+            </div>
+            <div style="background:white;border-radius:12px;padding:20px 24px;border:1px solid #e8e6e0;">
+              <div style="display:flex;align-items:center;gap:8px;margin-bottom:16px;">
+                <div style="width:22px;height:22px;border-radius:50%;background:#1D9E75;display:flex;align-items:center;justify-content:center;color:white;font-size:11px;font-weight:700;">7</div>
+                <div style="font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;">Métricas de Acompanhamento</div>
+              </div>
+              <div style="display:flex;flex-direction:column;gap:10px;font-size:12px;" id="ficha-metricas"></div>
+            </div>
+          </div>
+
+          <!-- BLOCO 8: Recomendações Finais -->
+          <div style="background:white;border-radius:12px;padding:20px 24px;margin-bottom:16px;border:1px solid #e8e6e0;">
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:16px;">
+              <div style="width:22px;height:22px;border-radius:50%;background:#1D9E75;display:flex;align-items:center;justify-content:center;color:white;font-size:11px;font-weight:700;">8</div>
+              <div style="font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;">Recomendações Finais</div>
+            </div>
+            <div style="display:grid;grid-template-columns:1fr 1fr 0.8fr;gap:20px;">
+              <div>
+                <div style="display:flex;flex-direction:column;gap:10px;font-size:12px;">
+                  <div style="display:flex;gap:8px;"><span style="color:#1D9E75;font-size:14px;">✅</span>Manter consistência na frequência semanal.</div>
+                  <div style="display:flex;gap:8px;"><span style="color:#1D9E75;font-size:14px;">✅</span>Priorizar exercícios compostos e execução técnica.</div>
+                  <div style="display:flex;gap:8px;"><span style="color:#1D9E75;font-size:14px;">✅</span>Dormir bem (7–9h) e manter alimentação adequada.</div>
+                  <div style="display:flex;gap:8px;"><span style="color:#1D9E75;font-size:14px;">✅</span>Registrar cargas, repetições e percepção de esforço.</div>
+                  <div style="display:flex;gap:8px;"><span style="color:#1D9E75;font-size:14px;">✅</span>Reavaliar a cada 4–6 semanas ou conforme evolução.</div>
+                </div>
+              </div>
+              <div style="background:#f8fffe;border-radius:10px;padding:16px;border:1px solid rgba(29,158,117,.15);">
+                <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;">
+                  <div style="width:28px;height:28px;border-radius:50%;background:#1D9E75;display:flex;align-items:center;justify-content:center;color:white;font-size:12px;">⭐</div>
+                  <div style="font-size:13px;font-weight:700;">Resumo Executivo NERAS</div>
+                </div>
+                <div id="ficha-resumo-exec" style="font-size:11px;color:#333;line-height:1.6;"></div>
+              </div>
+              <div style="background:#f0fdf4;border-radius:10px;padding:16px;border:1px solid rgba(29,158,117,.2);">
+                <div style="display:flex;align-items:center;gap:6px;margin-bottom:8px;">
+                  <span style="font-size:16px;">📅</span>
+                  <div style="font-size:12px;font-weight:700;color:#1D9E75;">Próxima Reavaliação</div>
+                </div>
+                <div id="ficha-proxima-aval" style="font-size:16px;font-weight:700;color:#1C1C1A;margin-bottom:8px;">—</div>
+                <div style="font-size:11px;color:#555;">Foco: Avaliar evolução de cargas e medidas antropométricas.</div>
+                <div style="margin-top:10px;font-size:11px;font-weight:600;color:#1D9E75;" id="ficha-sugestao"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- EXERCÍCIOS DO TREINO (detalhado) -->
+          <div style="background:white;border-radius:12px;padding:20px 24px;margin-bottom:16px;border:1px solid #e8e6e0;">
+            <div style="font-size:15px;font-weight:700;margin-bottom:16px;">Exercícios do Treino</div>
+            <table style="width:100%;border-collapse:collapse;font-size:12px;">
+              <thead><tr id="ficha-ex-header" style="border-bottom:2px solid #f0eeea;"><th style="padding:8px;color:#aaa;font-size:10px;width:3%;">#</th><th style="padding:8px;color:#aaa;font-size:10px;">Exercício</th><th style="text-align:center;padding:8px;color:#aaa;font-size:10px;">Séries</th><th style="text-align:center;padding:8px;color:#aaa;font-size:10px;">Reps</th><th style="text-align:center;padding:8px;color:#aaa;font-size:10px;">Descanso</th><th style="text-align:center;padding:8px;color:#aaa;font-size:10px;">Dado</th><th style="text-align:left;padding:8px;color:#aaa;font-size:10px;">Obs</th></tr></thead>
+              <tbody id="ficha-exercises-tbody"></tbody>
+            </table>
+            <div id="ficha-show-more" style="display:none;text-align:center;margin-top:14px;">
+              <button onclick="document.getElementById('ficha-show-more').style.display='none';document.querySelectorAll('.ficha-ex-hidden').forEach(r=>r.style.display='')" style="padding:7px 20px;border-radius:8px;border:1px solid #d0cec7;background:transparent;color:#1D9E75;font-size:12px;cursor:pointer;">Ver todos os exercícios ∨</button>
+            </div>
+          </div>
+
+          <!-- CHECKLIST + HISTÓRICO + ORIENTAÇÕES -->
+          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-bottom:16px;">
+            <div style="background:white;border-radius:12px;padding:20px 24px;border:1px solid #e8e6e0;">
+              <div style="font-size:14px;font-weight:700;margin-bottom:14px;">Checklist do Treino</div>
+              <div style="display:flex;gap:14px;align-items:center;margin-bottom:14px;">
+                <div style="position:relative;width:68px;height:68px;flex-shrink:0;">
+                  <svg viewBox="0 0 68 68" style="transform:rotate(-90deg);width:68px;height:68px;">
+                    <circle cx="34" cy="34" r="27" fill="none" stroke="#f0eeea" stroke-width="7"/>
+                    <circle id="ficha-checklist-circle" cx="34" cy="34" r="27" fill="none" stroke="#1D9E75" stroke-width="7" stroke-dasharray="170" stroke-dashoffset="85" stroke-linecap="round"/>
+                  </svg>
+                  <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;" id="ficha-checklist-pct">0%</div>
+                </div>
+                <div style="font-size:11px;color:#888;">Progresso do treino</div>
+              </div>
+              <div id="ficha-checklist" style="display:flex;flex-direction:column;gap:7px;font-size:12px;max-height:160px;overflow-y:auto;"></div>
+              <div id="ficha-checklist-summary" style="margin-top:10px;font-size:11px;color:#888;text-align:center;"></div>
+            </div>
+            <div style="background:white;border-radius:12px;padding:20px 24px;border:1px solid #e8e6e0;">
+              <div style="font-size:14px;font-weight:700;margin-bottom:14px;">Histórico de Alterações</div>
+              <div id="ficha-historico" style="display:flex;flex-direction:column;gap:10px;font-size:11px;max-height:200px;overflow-y:auto;"></div>
+              <button onclick="showToast('Histórico completo em breve')" style="margin-top:10px;background:transparent;border:none;color:#1D9E75;font-size:11px;cursor:pointer;text-decoration:underline;">Ver histórico completo</button>
+            </div>
+            <div style="background:white;border-radius:12px;padding:20px 24px;border:1px solid #e8e6e0;">
+              <div style="font-size:14px;font-weight:700;color:#EF4444;margin-bottom:14px;">Cuidados Específicos</div>
+              <div id="ficha-cuidados-list" style="font-size:12px;color:#333;margin-bottom:12px;"></div>
+              <div style="font-size:14px;font-weight:700;margin-bottom:10px;margin-top:12px;border-top:1px solid #f0eeea;padding-top:12px;">Orientações Gerais</div>
+              <div style="display:flex;flex-direction:column;gap:7px;font-size:12px;">
+                <div style="display:flex;gap:7px;"><span style="color:#1D9E75;">✓</span>Aquecimento antes do treino.</div>
+                <div style="display:flex;gap:7px;"><span style="color:#1D9E75;">✓</span>Respeitar intervalos de descanso.</div>
+                <div style="display:flex;gap:7px;"><span style="color:#1D9E75;">✓</span>Priorizar técnica correta.</div>
+                <div style="display:flex;gap:7px;"><span style="color:#1D9E75;">✓</span>Hidratar-se durante a sessão.</div>
+                <div style="display:flex;gap:7px;"><span style="color:#1D9E75;">✓</span>Interromper em caso de dor.</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- OBSERVAÇÕES -->
+          <div style="background:white;border-radius:12px;padding:18px 24px;border:1px solid #e8e6e0;">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
+              <div style="font-size:14px;font-weight:700;">Observações</div>
+              <button onclick="editarObservacoesFicha()" style="background:none;border:none;cursor:pointer;color:#aaa;font-size:15px;">✏</button>
+            </div>
+            <div id="ficha-obs" style="font-size:12px;color:#555;line-height:1.7;">Treino estruturado com base no perfil do cliente. Priorizar execução técnica e progressão gradual de cargas.</div>
+          </div>
+
+          <div style="text-align:center;margin-top:20px;font-size:11px;color:#aaa;">NERAS Performance – Ciência, Educação e Performance.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
 </main>
 
 <!-- DRAWER -->
@@ -3601,8 +3621,6 @@
 
 <script>
   const pageTitles = {
-    chat: '🤖 IA Assistente',
-    conhecimento: '📚 Centro de Conhecimento',
     dashboard: 'Dashboard',
     clientes: 'Clientes',
     cadastro: 'Cadastrar Cliente',
@@ -3659,10 +3677,10 @@
     const sexo = document.getElementById('f-sexo').value;
     const gestacao = document.getElementById('gestacao-section');
     if (sexo === 'F') {
-      gestacao.style.display = 'block';
-      gestacao.style.animation = 'fadeIn 0.25s ease';
+      if (gestacao) gestacao.style.display = 'block';
+      if (gestacao) gestacao.style.animation = 'fadeIn 0.25s ease';
     } else {
-      gestacao.style.display = 'none';
+      if (gestacao) gestacao.style.display = 'none';
       gestacao.querySelectorAll('.pill').forEach(p => p.classList.remove('selected'));
     }
     updateProgress();
@@ -3673,10 +3691,11 @@
     document.getElementById('trat-sim').classList.remove('selected');
     document.getElementById('trat-' + val).classList.add('selected');
     const fields = document.getElementById('tratamento-fields');
+    if (!fields) return;
     if (val === 'sim') {
       fields.style.display = 'flex';
       fields.style.animation = 'fadeIn 0.2s ease';
-    } else {
+    } else if (fields) {
       fields.style.display = 'none';
     }
     updateProgress();
@@ -3686,6 +3705,7 @@
     el.classList.toggle('selected');
     const anySelected = document.querySelectorAll('.defic-pill.selected').length > 0;
     const alert = document.getElementById('defic-alert');
+    if (!alert) return;
     const txt = document.getElementById('defic-alert-text');
     if (anySelected) {
       alert.style.display = 'block';
@@ -3746,6 +3766,7 @@
 
   function triggerIAAnalysis() {
     const loading = document.getElementById('ia-loading');
+    if (!loading) return;
     const results = document.getElementById('ia-results');
     const refs = document.getElementById('ia-refs');
     if (!loading || !results || !refs) return;
@@ -3801,30 +3822,144 @@
     const input = document.getElementById('chat-input');
     const msg = presetMsg || (input ? input.value.trim() : '');
     if (!msg) return;
-    if (input) input.value = '';
-    // Reset textarea height
-    if (input) input.style.height = 'auto';
+    if (input) { input.value = ''; input.style.height = 'auto'; }
     appendMsg(msg, 'user');
     sendRealAI(msg);
   }
 
   function sendChatMsg(msg) {
-    // If not already on chat page, navigate first
-    const chatPage = document.getElementById('page-chat');
-    if (!chatPage || !chatPage.classList.contains('active')) {
-      showPage('chat', document.querySelectorAll('.nav-item')[5]);
-    }
+    showPage('chat', document.querySelectorAll('.nav-item')[5]);
     setTimeout(() => {
       appendMsg(msg, 'user');
       setTimeout(() => sendRealAI(msg), 100);
-    }, chatPage && chatPage.classList.contains('active') ? 0 : 150);
+    }, 100);
   }
 
-  // sendRealAI — redesigned version defined below
+  async function sendRealAI(userMsg) {
+    const container = document.getElementById('chat-messages');
+    const client = (typeof getActiveClient === 'function') ? getActiveClient() : null;
+    const obs = (client && client.observacoes) ? (Array.isArray(client.observacoes) ? client.observacoes.slice(0,3).map(function(o){return typeof o==='string'?o:(o.text||'');}).join('; ') : String(client.observacoes)) : '';
+    const tags = client && client.tags ? client.tags.slice(0,8).join(', ') : '';
 
+    // Thinking indicator
+    const thinkId = 'think-' + Date.now();
+    const thinkRow = document.createElement('div');
+    thinkRow.id = thinkId;
+    thinkRow.style.cssText = 'max-width:820px;width:100%;margin:0 auto;box-sizing:border-box;';
+    thinkRow.innerHTML = '<div style="display:flex;gap:12px;"><div style="width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,var(--green),#0a6b4a);display:flex;align-items:center;justify-content:center;color:white;font-size:16px;flex-shrink:0;">&#x1F916;</div><div style="display:flex;align-items:center;gap:10px;padding:10px 0;"><div style="display:flex;gap:3px;" class="typing-dots"><span></span><span></span><span></span></div><span style="font-size:12px;color:var(--text-muted);">NERAS esta analisando...</span></div></div>';
+    if (container) { container.appendChild(thinkRow); container.scrollTop = container.scrollHeight; }
 
-  // appendMsg — redesigned version defined below
+    const nomeCliente = client ? (client.nome || 'nao definido') : 'nao definido';
+    const objCliente  = client ? (client.objetivo || '-') : '-';
+    const nivelCliente= client ? (client.nivel || '-') : '-';
+    const sistema = 'Voce eh N.E.R.A.S, assistente cientifico especializado em Ciencias do Exercicio para personal trainers profissionais. NUNCA diagnostique. NUNCA substitua medico ou fisioterapeuta. Responda com precisao cientifica e linguagem pratica. Use topicos e estrutura clara, maximo 4 secoes. Mencione exercicios especificos, progressao, cuidados e evidencias quando relevante. Cliente ativo: ' + nomeCliente + ', Objetivo: ' + objCliente + ', Nivel: ' + nivelCliente + ', Observacoes: ' + (obs||'nenhuma') + ', Tags: ' + (tags||'nenhuma') + '.';
 
+    try {
+      const res = await fetch('https://api.anthropic.com/v1/messages', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          model: 'claude-sonnet-4-20250514',
+          max_tokens: 900,
+          system: sistema,
+          messages: [{ role: 'user', content: userMsg }]
+        })
+      });
+      const data = await res.json();
+      const reply = (data && data.content && data.content[0]) ? data.content[0].text : 'Nao foi possivel obter resposta.';
+      const el = document.getElementById(thinkId);
+      if (el) el.remove();
+      appendMsg(reply, 'ai');
+    } catch(err) {
+      const el = document.getElementById(thinkId);
+      if (el) el.remove();
+      appendMsg('Erro de conexao. Verifique sua rede e tente novamente.', 'ai');
+    }
+  }
+
+  function appendMsg(text, role) {
+    var container = document.getElementById('chat-messages');
+    if (!container) return;
+    var now = new Date().toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'});
+    var client = (typeof getActiveClient === 'function') ? getActiveClient() : null;
+    var row = document.createElement('div');
+    row.style.cssText = 'max-width:820px;width:100%;margin:0 auto;box-sizing:border-box;';
+
+    if (role === 'user') {
+      var bubble = document.createElement('div');
+      bubble.style.cssText = 'display:flex;justify-content:flex-end;gap:10px;';
+      var inner = document.createElement('div');
+      inner.style.cssText = 'display:flex;flex-direction:column;align-items:flex-end;gap:4px;max-width:75%;';
+      var timeEl = document.createElement('div');
+      timeEl.style.cssText = 'font-size:11px;color:var(--text-muted);';
+      timeEl.textContent = now;
+      var msgEl = document.createElement('div');
+      msgEl.style.cssText = 'background:var(--green);color:white;padding:12px 18px;border-radius:18px 18px 4px 18px;font-size:14px;line-height:1.6;';
+      msgEl.textContent = text;
+      inner.appendChild(timeEl);
+      inner.appendChild(msgEl);
+      bubble.appendChild(inner);
+      row.appendChild(bubble);
+
+    } else {
+      var formatted = text
+        .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+        .replace(/^### (.+)$/gm, '<div style="font-size:13px;font-weight:700;color:var(--green);margin:12px 0 6px;">$1</div>')
+        .replace(/^## (.+)$/gm, '<div style="font-size:14px;font-weight:700;margin:14px 0 6px;">$1</div>')
+        .replace(/^[-] (.+)$/gm, '<div style="padding:3px 0;display:flex;gap:6px;"><span style="color:var(--green);">•</span><span>$1</span></div>')
+        .replace(/\n/g, '<br>');
+
+      var wrap = document.createElement('div');
+      wrap.style.cssText = 'display:flex;gap:12px;';
+
+      var avatar = document.createElement('div');
+      avatar.style.cssText = 'width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,var(--green),#0a6b4a);display:flex;align-items:center;justify-content:center;color:white;font-size:16px;flex-shrink:0;';
+      avatar.textContent = '🤖';
+
+      var body = document.createElement('div');
+      body.style.cssText = 'flex:1;min-width:0;';
+
+      var header = document.createElement('div');
+      header.style.cssText = 'font-size:13px;font-weight:700;margin-bottom:8px;';
+      header.innerHTML = 'NERAS IA <span style="font-weight:400;color:var(--text-muted);font-size:11px;">' + now + '</span>';
+
+      var textDiv = document.createElement('div');
+      textDiv.style.cssText = 'font-size:14px;line-height:1.75;color:var(--text);';
+      textDiv.innerHTML = formatted;
+
+      var actions = document.createElement('div');
+      actions.style.cssText = 'display:flex;gap:8px;margin-top:14px;flex-wrap:wrap;';
+
+      var btn1 = document.createElement('button');
+      btn1.style.cssText = 'padding:6px 14px;border-radius:8px;background:var(--green);color:white;border:none;font-size:11px;font-weight:600;cursor:pointer;font-family:inherit;';
+      btn1.textContent = '✓ Usar no atendimento';
+      btn1.onclick = function(){ showToast('✓ Registrado no atendimento'); };
+
+      var btn2 = document.createElement('button');
+      btn2.style.cssText = 'padding:6px 14px;border-radius:8px;background:transparent;border:1px solid var(--border);color:var(--text);font-size:11px;cursor:pointer;font-family:inherit;';
+      btn2.textContent = '↗ Enviar exercícios para treino';
+      btn2.onclick = function(){ showPage('treino', document.querySelectorAll('.nav-item')[3]); };
+
+      var btn3 = document.createElement('button');
+      btn3.style.cssText = 'padding:6px 14px;border-radius:8px;background:transparent;border:1px solid var(--border);color:var(--text);font-size:11px;cursor:pointer;font-family:inherit;';
+      btn3.textContent = '🔬 Ver evidências relacionadas';
+      btn3.onclick = function(){ showPage('pesquisa', document.querySelectorAll('.nav-item')[5]); };
+
+      actions.appendChild(btn1);
+      actions.appendChild(btn2);
+      actions.appendChild(btn3);
+
+      body.appendChild(header);
+      body.appendChild(textDiv);
+      body.appendChild(actions);
+      wrap.appendChild(avatar);
+      wrap.appendChild(body);
+      row.appendChild(wrap);
+    }
+
+    container.appendChild(row);
+    container.scrollTop = container.scrollHeight;
+  }
 
   function setResearch(term) {
     document.getElementById('research-query').value = term;
@@ -5285,7 +5420,8 @@
     }).join('');
 
     const overlay = document.getElementById('folder-picker-overlay');
-    overlay.style.display = 'flex';
+    if (!overlay) return;
+    if (overlay) overlay.style.display = 'flex';
   }
 
   function confirmSaveToFolder(folderId) {
@@ -5319,7 +5455,9 @@
     const explorar = document.getElementById('tab-content-explorar');
     const salvos = document.getElementById('tab-content-salvos');
     const btnE = document.getElementById('tab-explorar');
+    if (!btnE) return;
     const btnS = document.getElementById('tab-salvos');
+    if (!btnS) return;
     if (tab === 'explorar') {
       explorar.style.display = 'block'; salvos.style.display = 'none';
       btnE.style.color = 'var(--green)'; btnE.style.borderBottomColor = 'var(--green)';
@@ -5414,6 +5552,7 @@
     const meta = ARTICLES_META[id];
     if (!meta) return;
     const overlay = document.getElementById('resumo-modal-overlay');
+    if (!overlay) return;
     const content = document.getElementById('resumo-modal-content');
     if (!content) return;
     overlay.style.display = 'flex';
@@ -6109,6 +6248,8 @@
     // Show workspace
     document.getElementById('modal-selector').style.display = 'none';
     const ws = document.getElementById('treino-workspace');
+    if (!ws) return;
+    if (!ws) return;
     ws.style.display = 'block';
     ws.style.animation = 'fadeIn 0.3s ease';
 
@@ -6135,6 +6276,7 @@
 
     // Table header
     const header = document.getElementById('treino-table-header');
+    if (!header) return;
     if (!header) return;
     header.style.gridTemplateColumns = cfg.colWidths;
     header.innerHTML = cfg.columns.map((c,i) => `<span${i===0?'':' style="text-align:center;"'}>${c}</span>`).join('');
@@ -6206,6 +6348,8 @@
     const cfg = MODALITY_CONFIG[currentModality];
     if (!cfg) return;
     const form = document.getElementById('add-item-form');
+    if (!form) return;
+    if (!form) return;
     form.style.display = 'block';
 
     const fieldsHtml = cfg.itemFields.map(f => {
@@ -7547,21 +7691,15 @@
 
   // ── PATCH showPage to trigger render functions ────────────────────
   function showPage(id, navEl) {
-    // Hide all pages
     document.querySelectorAll('.page').forEach(p => {
       p.classList.remove('active');
-      p.setAttribute('style', (p.getAttribute('style')||'').replace(/display:[^;]+;?/g,'') + 'display:none;');
+      p.style.display = 'none';
     });
     document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
     const _pg = document.getElementById('page-' + id);
     if (_pg) {
       _pg.classList.add('active');
-      const baseStyle = (_pg.getAttribute('style')||'').replace(/display:[^;]+;?/g,'');
-      if (id === 'chat') {
-        _pg.setAttribute('style', baseStyle + 'display:flex;flex-direction:column;');
-      } else {
-        _pg.setAttribute('style', baseStyle + 'display:block;');
-      }
+      _pg.style.display = (id === 'chat') ? 'flex' : 'block';
     }
     const _titleEl = document.getElementById('page-title');
     if (_titleEl) _titleEl.textContent = pageTitles[id] || id;
@@ -7578,14 +7716,11 @@
     if (id === 'chat') {
       setTimeout(updateIAContextBar, 100);
     }
-    if (id === 'pesquisa') {
-      setTimeout(() => { switchResearchTab('explorar'); renderSavedArticles(); }, 100);
-    }
-    // Scroll to top of page
-    const pgEl = document.getElementById('page-' + id);
-    if (pgEl) setTimeout(() => { pgEl.scrollTop = 0; }, 50);
     if (id === 'conhecimento') {
       setTimeout(initCentroConhecimento, 100);
+    }
+    if (id === 'pesquisa') {
+      setTimeout(() => { if(typeof switchResearchTab==='function') switchResearchTab('explorar'); }, 100);
     }
     if (id === 'biblioteca') {
       setTimeout(() => {
@@ -9688,7 +9823,23 @@
   function isCKFav(type, id) { return ckFavorites.includes(type + ':' + id); }
 
   // ── TAB SWITCHER ───────────────────────────────────────────
-  // showCKTab replaced by extended version below
+  function showCKTab(tab) {
+    ckCurrentTab = tab;
+    const panels = ['livros','resumos','protocolos','favoritos','ia'];
+    panels.forEach(p => {
+      const panel = document.getElementById('ck-panel-' + p);
+      const btn   = document.getElementById('ck-tab-' + p);
+      if (!panel || !btn) return;
+      const active = p === tab;
+      panel.style.display = active ? '' : 'none';
+      btn.style.background   = active ? 'var(--green)' : 'transparent';
+      btn.style.color        = active ? 'white' : 'var(--text-muted)';
+      btn.style.borderColor  = active ? 'var(--green)' : 'var(--border)';
+    });
+    if (tab === 'livros')      renderCKBooks();
+    if (tab === 'protocolos')  renderCKProtocols();
+    if (tab === 'favoritos')   renderCKFavorites();
+  }
 
   // ── RENDER: BOOKS GRID ─────────────────────────────────────
   function renderCKBooks() {
@@ -9973,7 +10124,10 @@ ${text.slice(0, 3000)}`;
   }
 
   // ── INIT CENTRO DE CONHECIMENTO ────────────────────────────
-  // initCentroConhecimento replaced below
+  function initCentroConhecimento() {
+    renderCKBooks();
+    renderCKProtocols();
+  }
 
   // ── CLOSE MODALS ON OVERLAY CLICK ─────────────────────────
   document.addEventListener('DOMContentLoaded', () => {
@@ -9984,609 +10138,906 @@ ${text.slice(0, 3000)}`;
   });
 
 
-  // ═══════════════════════════════════════════════════════════
-  // CENTRO DE CONHECIMENTO — GUIAS, CASOS, TRILHAS, GRAPH
-  // ═══════════════════════════════════════════════════════════
-
-  const CK_GUIDES = [
-    { id:'g-hip', icon:'💪', color:'#1D9E75', title:'Hipertrofia para Iniciantes',
-      quando:'Cliente iniciante sem experiência em musculação, objetivo de ganho muscular.',
-      objetivo:'Estimular adaptações neuromusculares e hipertrofia inicial com segurança.',
-      cuidados:['Técnica antes de carga','Descanso 48–72h','Proteína 1.6–2.2g/kg'],
-      exercicios:['Supino reto','Agachamento livre','Remada curvada','Desenvolvimento'],
-      evidencias:'hypertrophy resistance training beginners', tags:['hipertrofia','força','musculação','iniciante'] },
-    { id:'g-emag', icon:'⚖️', color:'#F59E0B', title:'Emagrecimento',
-      quando:'IMC acima de 25, objetivo de perda de gordura e melhora da composição corporal.',
-      objetivo:'Déficit calórico sustentável com preservação de massa magra.',
-      cuidados:['Não reduzir abaixo do BMR','Hidratação','Acompanhamento nutricional'],
-      exercicios:['HIIT funcional','Corrida intervalada','Circuito funcional','Caminhada moderada'],
-      evidencias:'weight loss exercise diet caloric deficit', tags:['emagrecimento','cardio','funcional'] },
-    { id:'g-mob-idosos', icon:'🧓', color:'#8B5CF6', title:'Mobilidade para Idosos',
-      quando:'Clientes acima de 60 anos com rigidez articular, histórico de quedas ou baixa mobilidade.',
-      objetivo:'Ampliar ADM, prevenir quedas e preservar autonomia funcional.',
-      cuidados:['Apoio sempre disponível','Amplitude progressiva','FC máx 120–130bpm'],
-      exercicios:['Cat-Camel','90/90','Ponte glúteo','Equilíbrio unilateral assistido'],
-      evidencias:'mobility exercise elderly fall prevention', tags:['idosos','mobilidade','equilíbrio','quedas'] },
-    { id:'g-lombar', icon:'🔴', color:'#EF4444', title:'Lombalgia',
-      quando:'Cliente com dor lombar crônica ou subaguda, baixa estabilidade de core.',
-      objetivo:'Estabilizar a coluna lombar, reduzir dor e prevenir recorrência.',
-      cuidados:['Sem hiperlordose','Dor acima de 3/10 = parar','Alinhamento com fisioterapeuta'],
-      exercicios:['Bird Dog','Dead Bug','Prancha modificada','Mobilidade torácica'],
-      evidencias:'low back pain exercise McGill stabilization', tags:['lombar','reabilitação','core','dor'] },
-    { id:'g-joelho', icon:'🦵', color:'#3B82F6', title:'Lesão de Joelho',
-      quando:'Pós-lesão de LCA, menisco ou condromalacia, com liberação para exercício.',
-      objetivo:'Restaurar força, mobilidade e propriocepção do joelho progressivamente.',
-      cuidados:['Nunca forçar amplitude','Monitorar edema','Protocolo com fisioterapeuta'],
-      exercicios:['Step-up baixo','Ponte glúteo','Clamshell','Terminal Knee Extension'],
-      evidencias:'knee rehabilitation ACL exercise strengthening', tags:['joelho','reabilitação','LCA','fisioterapia'] },
-    { id:'g-gestante', icon:'🤰', color:'#EC4899', title:'Gestantes',
-      quando:'Gestante com liberação médica, qualquer trimestre com adaptações.',
-      objetivo:'Manter condicionamento, reduzir desconfortos e preparar para o parto.',
-      cuidados:['FC máx 140bpm','Sem decúbito dorsal pós 20 sem','Parar se dor ou contrações'],
-      exercicios:['Caminhada leve','Respiração diafragmática','Ponte glúteo','Kegel'],
-      evidencias:'exercise pregnancy guidelines ACOG safety', tags:['gestante','baixoimpacto','mobilidade'] },
-    { id:'g-hiper', icon:'❤️', color:'#DC2626', title:'Hipertensão',
-      quando:'Clientes hipertensos com PA controlada e liberação médica.',
-      objetivo:'Reduzir PA por meio de exercício aeróbio e resistência com baixa intensidade.',
-      cuidados:['Sem Valsalva','12–20 reps','Monitorar PA antes e depois','Médico autoriza'],
-      exercicios:['Caminhada moderada','Circuito leve','Natação','Bicicleta'],
-      evidencias:'hypertension exercise blood pressure aerobic', tags:['hipertensão','baixoimpacto','cardio'] },
-    { id:'g-retorno', icon:'🏃', color:'#10B981', title:'Retorno ao Esporte',
-      quando:'Atleta com alta médica ou fisioterápica pós-lesão ou afastamento.',
-      objetivo:'Recondicionar de forma segura e progressiva até o retorno esportivo completo.',
-      cuidados:['Critérios funcionais antes do retorno','Monitorar fadiga','Equipe multidisciplinar'],
-      exercicios:['Sprint progressivo','Pliometria básica','Agilidade com escada','Shuttle run'],
-      evidencias:'return to sport criteria rehabilitation athlete', tags:['esportivo','reabilitação','sprint','agilidade'] },
-  ];
-
-  const CK_CASES = [
-    { id:'c1', icon:'👨', color:'#3B82F6',
-      title:'Homem, 65 anos — Hipertensão + Lombalgia',
-      perfil:'Homem, 65 anos, aposentado, sedentário há 8 anos. PA 145/92mmHg controlada com medicação. Lombalgia crônica grau II. IMC 27.5.',
-      objetivo:'Melhorar condicionamento cardiovascular, reduzir dor lombar e recuperar autonomia funcional.',
-      cuidados:['FC máx ~155bpm (220-idade)','Sem manobra de Valsalva','Não sobrecarregar lombar'],
-      exercicios:['Caminhada progressiva','Bird Dog','Dead Bug','Ponte glúteo','Mobilidade torácica','Elevação de panturrilha'],
-      progressao:['Sem 1–2: Caminhada 20min + mobilidade', 'Sem 3–4: Adicionar Bird Dog + Ponte', 'Sem 5–8: Circuito leve + aumento de caminhada','Sem 9+: Resistência leve progressiva'],
-      errosComuns:['Aumentar carga antes de dominar técnica','Ignorar dor como sinal de alerta','Não monitorar PA pré e pós treino'],
-      tags:['idosos','hipertensão','lombar','baixoimpacto'] },
-    { id:'c2', icon:'👩', color:'#EC4899',
-      title:'Mulher, 28 anos — Gestante 2º Trimestre + Baixa Energia',
-      perfil:'Mulher, 28 anos, 22ª semana de gestação, liberação médica. Relata fadiga e baixa energia. Praticava pilates antes da gestação.',
-      objetivo:'Manter condicionamento, reduzir desconfortos gestacionais e preparar para o parto.',
-      cuidados:['FC máx 140bpm','Sem decúbito dorsal prolongado','Parar se contrações ou dor'],
-      exercicios:['Caminhada leve 20min','Respiração diafragmática','Mobilidade pélvica','Agachamento assistido','Kegel','Remada com elástico'],
-      progressao:['Fase atual: Mobilidade + condicionamento leve','2x/semana 30min','Aumentar gradualmente conforme tolerância','Reduzir intensidade no 3º trimestre'],
-      errosComuns:['Manter exercícios de alto impacto','Ignorar tontura e falta de ar','Não adaptar ao crescimento abdominal'],
-      tags:['gestante','baixoimpacto','fadiga','mobilidade'] },
-    { id:'c3', icon:'🏃', color:'#10B981',
-      title:'Atleta Recreativo, 34 anos — Lesão de Joelho + Retorno ao Esporte',
-      perfil:'Homem, 34 anos, pratica futebol recreativo 2x/semana. Lesão de LCA há 6 meses, cirurgia realizada há 4 meses. Fisioterapeuta liberou progressão com personal.',
-      objetivo:'Reabilitar o joelho e retornar ao futebol com segurança em 4–6 meses.',
-      cuidados:['Protocolo alinhado com fisioterapeuta','Limb symmetry >90% antes do retorno','Monitorar dor e edema'],
-      exercicios:['Step-up progressivo','Ponte unilateral','Nordic curl','Pliometria básica','Sprint progressivo','Agilidade com cones'],
-      progressao:['Fase 1 (atual): Força + ROM','Fase 2: Pliometria básica','Fase 3: Exercícios específicos do futebol','Fase 4: Retorno ao jogo'],
-      errosComuns:['Acelerar a progressão por impaciência','Voltar ao esporte sem critérios funcionais','Ignorar assimetria de força'],
-      tags:['joelho','reabilitação','LCA','esportivo','retorno'] },
-    { id:'c4', icon:'👦', color:'#8B5CF6',
-      title:'Jovem, 22 anos — TDAH + Iniciante + Baixa Adesão',
-      perfil:'Homem, 22 anos, TDAH. Já tentou academias 3 vezes e abandonou. Objetivo: hipertrofia. Baixa energia matinal, prefere treinos à tarde.',
-      objetivo:'Criar rotina sustentável de treino com estímulos variados e progressão motivadora.',
-      cuidados:['Sessões curtas (40–45min)','Alta variedade de estímulos','Feedback frequente e positivo'],
-      exercicios:['Circuito funcional variado','Supersets','Treino fullbody 3x/semana','Exercícios compostos como base'],
-      progressao:['Fase 1: Adesão (8 semanas sem foco em carga)','Fase 2: Progressão de carga','Fase 3: Divisão por grupos musculares'],
-      errosComuns:['Programas muito repetitivos','Sessões longas demais','Foco excessivo em carga sem técnica'],
-      tags:['TDAH','iniciante','hipertrofia','adesão'] },
-  ];
-
-  const CK_TRILHAS = [
-    { id:'t-hip', icon:'💪', color:'#1D9E75', title:'Hipertrofia',
-      desc:'Do iniciante ao avançado — fundamentos de treino para ganho muscular.',
-      livros:['petroski-antropometria','sobotta'], protocolos:['hipertrofia-iniciante'],
-      guias:['g-hip'], tags:['hipertrofia','musculação','força'] },
-    { id:'t-idosos', icon:'🧓', color:'#8B5CF6', title:'Idosos & Qualidade de Vida',
-      desc:'Tudo para atender com segurança e eficácia a população idosa.',
-      livros:['gallahue','sobotta'], protocolos:['idosos-mobilidade'],
-      guias:['g-mob-idosos'], tags:['idosos','mobilidade','equilíbrio','quedas'] },
-    { id:'t-reab', icon:'🦵', color:'#EF4444', title:'Reabilitação',
-      desc:'Protocolos e conhecimento para reabilitação ortopédica e retorno ao esporte.',
-      livros:['sobotta'], protocolos:['reabilitacao-joelho','retorno-esporte','prevencao-lesoes'],
-      guias:['g-joelho','g-retorno'], tags:['reabilitação','joelho','LCA','fisioterapia'] },
-    { id:'t-gestante', icon:'🤰', color:'#EC4899', title:'Gestantes',
-      desc:'Exercício seguro e eficaz durante a gestação, do 1º ao 3º trimestre.',
-      livros:[], protocolos:['gestante-protocolo'],
-      guias:['g-gestante'], tags:['gestante','baixoimpacto','segurança'] },
-    { id:'t-motor', icon:'👶', color:'#F59E0B', title:'Desenvolvimento Motor',
-      desc:'Da infância à terceira idade — compreendendo o desenvolvimento motor humano.',
-      livros:['gallahue'], protocolos:['idosos-mobilidade'],
-      guias:['g-mob-idosos'], tags:['coordenação','funcional','idosos','desenvolvimento'] },
-    { id:'t-esporte', icon:'⚽', color:'#3B82F6', title:'Retorno ao Esporte',
-      desc:'Critérios, protocolos e progressão para retorno esportivo seguro.',
-      livros:['sobotta'], protocolos:['retorno-esporte','prevencao-lesoes','reabilitacao-joelho'],
-      guias:['g-retorno','g-joelho'], tags:['esportivo','reabilitação','agilidade','sprint'] },
-  ];
-
-  // ── TAG MAP para Knowledge Graph ──────────────────────────
-  const CK_TAG_MAP = {
-    'joelho':      { livros:['sobotta'], protocolos:['reabilitacao-joelho','retorno-esporte'], guias:['g-joelho','g-retorno'], trilha:'t-reab' },
-    'lombar':      { livros:['sobotta'], protocolos:[], guias:['g-lombar'], trilha:null },
-    'idosos':      { livros:['gallahue','sobotta'], protocolos:['idosos-mobilidade'], guias:['g-mob-idosos'], trilha:'t-idosos' },
-    'hipertrofia': { livros:['petroski-antropometria'], protocolos:['hipertrofia-iniciante'], guias:['g-hip'], trilha:'t-hip' },
-    'gestante':    { livros:[], protocolos:['gestante-protocolo'], guias:['g-gestante'], trilha:'t-gestante' },
-    'hipertensão': { livros:['sobotta'], protocolos:[], guias:['g-hiper'], trilha:null },
-    'emagrecimento':{ livros:['petroski-antropometria'], protocolos:['emagrecimento'], guias:['g-emag'], trilha:null },
-    'reabilitação':{ livros:['sobotta'], protocolos:['reabilitacao-joelho','retorno-esporte'], guias:['g-joelho','g-retorno'], trilha:'t-reab' },
-    'LCA':         { livros:['sobotta'], protocolos:['reabilitacao-joelho','retorno-esporte'], guias:['g-joelho'], trilha:'t-reab' },
-    'TDAH':        { livros:['gallahue'], protocolos:['hipertrofia-iniciante'], guias:['g-hip'], trilha:null },
-    'coordenação': { livros:['gallahue'], protocolos:['idosos-mobilidade'], guias:['g-mob-idosos'], trilha:'t-motor' },
-    'mobilidade':  { livros:['sobotta','gallahue'], protocolos:['idosos-mobilidade'], guias:['g-mob-idosos','g-lombar'], trilha:'t-idosos' },
-  };
-
-  // ════════════════════════════════════════════════════════════
-  // RENDER FUNCTIONS
-  // ════════════════════════════════════════════════════════════
-
-  function renderCKGuides() {
-    const grid = document.getElementById('ck-guides-grid');
-    if (!grid) return;
-    grid.innerHTML = CK_GUIDES.map(g => `
-      <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:14px;padding:0;overflow:hidden;cursor:pointer;transition:.2s;" onclick="openCKGuide('${g.id}')" onmouseover="this.style.boxShadow='0 4px 20px rgba(0,0,0,.12)'" onmouseout="this.style.boxShadow=''">
-        <div style="background:${g.color};padding:18px 16px;display:flex;align-items:center;gap:10px;">
-          <span style="font-size:28px;">${g.icon}</span>
-          <div style="font-size:14px;font-weight:700;color:white;line-height:1.3;">${g.title}</div>
-          <button onclick="event.stopPropagation();toggleCKFavorite('guide','${g.id}')" style="margin-left:auto;background:rgba(255,255,255,.2);border:none;cursor:pointer;font-size:14px;border-radius:6px;padding:3px 6px;">${isCKFav('guide',g.id)?'⭐':'☆'}</button>
-        </div>
-        <div style="padding:14px;">
-          <div style="font-size:12px;color:var(--text-muted);margin-bottom:10px;line-height:1.5;">${g.quando.slice(0,80)}...</div>
-          <div style="display:flex;flex-wrap:wrap;gap:4px;margin-bottom:10px;">
-            ${g.tags.slice(0,3).map(t=>`<span style="font-size:10px;padding:2px 8px;border-radius:6px;background:rgba(29,158,117,.1);color:var(--green);">#${t}</span>`).join('')}
-          </div>
-          <div style="display:flex;gap:6px;">
-            <button onclick="event.stopPropagation();usarNoAtendimento('guide','${g.id}')" style="flex:1;padding:7px;background:var(--green);color:white;border:none;border-radius:8px;font-size:11px;font-weight:600;cursor:pointer;">🩺 Usar no Atendimento</button>
-          </div>
-        </div>
-      </div>`).join('');
-  }
-
-  function openCKGuide(id) {
-    const g = CK_GUIDES.find(x=>x.id===id);
-    if (!g) return;
-    const allEx = (typeof EXERCISES !== 'undefined') ? EXERCISES : [];
-    const relEx = allEx.filter(ex => (ex.tags||[]).some(t => g.tags.includes(t))).slice(0,6);
-    const modal = document.getElementById('ck-guide-modal');
-    const mc    = document.getElementById('ck-guide-modal-content');
-    if (!modal||!mc) return;
-    mc.innerHTML = `
-      <div style="display:flex;align-items:center;gap:12px;margin-bottom:20px;">
-        <div style="width:52px;height:52px;border-radius:12px;background:${g.color};display:flex;align-items:center;justify-content:center;font-size:26px;">${g.icon}</div>
-        <div style="flex:1;"><div style="font-size:18px;font-weight:700;">${g.title}</div></div>
-        <button onclick="usarNoAtendimento('guide','${g.id}')" style="padding:8px 14px;background:var(--green);color:white;border:none;border-radius:8px;font-size:12px;font-weight:600;cursor:pointer;">🩺 Usar no Atendimento</button>
-      </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px;">
-        <div style="background:var(--bg);border-radius:10px;padding:14px;">
-          <div style="font-size:11px;font-weight:700;color:var(--green);margin-bottom:8px;">🎯 QUANDO USAR</div>
-          <div style="font-size:12px;color:var(--text);line-height:1.6;">${g.quando}</div>
-        </div>
-        <div style="background:var(--bg);border-radius:10px;padding:14px;">
-          <div style="font-size:11px;font-weight:700;color:var(--green);margin-bottom:8px;">✓ OBJETIVO</div>
-          <div style="font-size:12px;color:var(--text);line-height:1.6;">${g.objetivo}</div>
-        </div>
-      </div>
-      <div style="background:rgba(239,68,68,.06);border:1px solid rgba(239,68,68,.15);border-radius:10px;padding:14px;margin-bottom:12px;">
-        <div style="font-size:11px;font-weight:700;color:#EF4444;margin-bottom:8px;">⚠ CUIDADOS</div>
-        ${g.cuidados.map(c=>`<div style="font-size:12px;padding:3px 0;">• ${c}</div>`).join('')}
-      </div>
-      ${relEx.length>0?`<div style="margin-bottom:12px;"><div style="font-size:11px;font-weight:700;color:var(--text-muted);margin-bottom:8px;">🏋️ EXERCÍCIOS RELACIONADOS</div><div style="display:flex;flex-wrap:wrap;gap:6px;">${relEx.map(ex=>`<span onclick="openExModal(${ex.id});document.getElementById('ck-guide-modal').style.display='none'" style="font-size:11px;padding:5px 12px;border-radius:8px;background:rgba(29,158,117,.1);border:1px solid rgba(29,158,117,.25);color:var(--green);cursor:pointer;">${ex.name}</span>`).join('')}</div></div>`:''}
-      <button onclick="showPage('pesquisa',document.querySelectorAll('.nav-item')[6]);setTimeout(()=>{const q=document.getElementById('research-query');if(q){q.value='${g.evidencias}';if(typeof searchResearch==='function')searchResearch();}},300);document.getElementById('ck-guide-modal').style.display='none'" style="margin-right:8px;padding:8px 16px;background:rgba(55,138,221,.1);color:#378ADD;border:1px solid rgba(55,138,221,.3);border-radius:8px;font-size:11px;cursor:pointer;">🔬 Ver Evidências Relacionadas</button>
-      <button onclick="document.getElementById('ck-guide-modal').style.display='none'" style="padding:8px 16px;background:transparent;border:1px solid var(--border);color:var(--text-muted);border-radius:8px;font-size:11px;cursor:pointer;">Fechar</button>`;
-    modal.style.display = 'flex';
-  }
-
-  function renderCKCases() {
-    const grid = document.getElementById('ck-cases-grid');
-    if (!grid) return;
-    grid.innerHTML = CK_CASES.map(cs => `
-      <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:14px;padding:20px;cursor:pointer;transition:.2s;" onclick="openCKCase('${cs.id}')" onmouseover="this.style.boxShadow='0 4px 20px rgba(0,0,0,.12)'" onmouseout="this.style.boxShadow=''">
-        <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
-          <div style="width:44px;height:44px;border-radius:12px;background:${cs.color};display:flex;align-items:center;justify-content:center;font-size:22px;">${cs.icon}</div>
-          <div style="flex:1;"><div style="font-size:13px;font-weight:700;line-height:1.3;">${cs.title}</div></div>
-        </div>
-        <div style="font-size:12px;color:var(--text-muted);line-height:1.5;margin-bottom:10px;">${cs.perfil.slice(0,90)}...</div>
-        <div style="display:flex;flex-wrap:wrap;gap:4px;">
-          ${cs.tags.slice(0,3).map(t=>`<span style="font-size:10px;padding:2px 8px;border-radius:6px;background:rgba(29,158,117,.1);color:var(--green);">#${t}</span>`).join('')}
-        </div>
-      </div>`).join('');
-  }
-
-  function openCKCase(id) {
-    const cs = CK_CASES.find(x=>x.id===id);
-    if (!cs) return;
-    const allEx = (typeof EXERCISES !== 'undefined') ? EXERCISES : [];
-    const relEx = allEx.filter(ex => (ex.tags||[]).some(t => cs.tags.includes(t))).slice(0,6);
-    const modal = document.getElementById('ck-guide-modal');
-    const mc    = document.getElementById('ck-guide-modal-content');
-    if (!modal||!mc) return;
-    mc.innerHTML = `
-      <div style="display:flex;align-items:center;gap:12px;margin-bottom:20px;">
-        <div style="width:52px;height:52px;border-radius:12px;background:${cs.color};display:flex;align-items:center;justify-content:center;font-size:26px;">${cs.icon}</div>
-        <div><div style="font-size:17px;font-weight:700;">${cs.title}</div><div style="font-size:11px;color:var(--text-muted);">Caso Clínico</div></div>
-        <button onclick="usarNoAtendimento('case','${cs.id}')" style="margin-left:auto;padding:8px 14px;background:var(--green);color:white;border:none;border-radius:8px;font-size:11px;font-weight:600;cursor:pointer;">🩺 Usar no Atendimento</button>
-      </div>
-      <div style="background:var(--bg);border-radius:10px;padding:14px;margin-bottom:12px;">
-        <div style="font-size:11px;font-weight:700;color:#378ADD;margin-bottom:8px;">👤 PERFIL</div>
-        <div style="font-size:12px;color:var(--text);line-height:1.6;">${cs.perfil}</div>
-      </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;">
-        <div style="background:var(--bg);border-radius:10px;padding:14px;">
-          <div style="font-size:11px;font-weight:700;color:var(--green);margin-bottom:8px;">📈 PROGRESSÃO</div>
-          ${cs.progressao.map((f,i)=>`<div style="font-size:12px;padding:4px 0;border-bottom:1px solid var(--border);display:flex;gap:6px;"><span style="color:var(--green);font-weight:700;">${i+1}</span>${f}</div>`).join('')}
-        </div>
-        <div style="background:rgba(239,68,68,.06);border:1px solid rgba(239,68,68,.15);border-radius:10px;padding:14px;">
-          <div style="font-size:11px;font-weight:700;color:#EF4444;margin-bottom:8px;">⚠ ERROS COMUNS</div>
-          ${cs.errosComuns.map(e=>`<div style="font-size:12px;padding:3px 0;">• ${e}</div>`).join('')}
-        </div>
-      </div>
-      ${relEx.length>0?`<div style="margin-bottom:12px;"><div style="font-size:11px;font-weight:700;color:var(--text-muted);margin-bottom:8px;">🏋️ EXERCÍCIOS INDICADOS</div><div style="display:flex;flex-wrap:wrap;gap:6px;">${relEx.map(ex=>`<span onclick="openExModal(${ex.id});document.getElementById('ck-guide-modal').style.display='none'" style="font-size:11px;padding:5px 12px;border-radius:8px;background:rgba(29,158,117,.1);border:1px solid rgba(29,158,117,.25);color:var(--green);cursor:pointer;">${ex.name}</span>`).join('')}</div></div>`:''}
-      <button onclick="document.getElementById('ck-guide-modal').style.display='none'" style="padding:8px 16px;background:transparent;border:1px solid var(--border);color:var(--text-muted);border-radius:8px;font-size:11px;cursor:pointer;width:100%;margin-top:4px;">Fechar</button>`;
-    modal.style.display = 'flex';
-  }
-
-  function renderCKTrilhas() {
-    const el = document.getElementById('ck-trilhas-content');
-    if (!el) return;
-    el.innerHTML = `
-      <div style="margin-bottom:20px;font-size:13px;color:var(--text-muted);">Percursos estruturados de conhecimento para especialidades da Educação Física.</div>
-      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px;">
-        ${CK_TRILHAS.map(t => {
-          const livros = t.livros.map(id => CK_BOOKS.find(b=>b.id===id)).filter(Boolean);
-          const protos = t.protocolos.map(id => CK_PROTOCOLS.find(p=>p.id===id)).filter(Boolean);
-          const guias  = t.guias.map(id => CK_GUIDES.find(g=>g.id===id)).filter(Boolean);
-          return `<div style="background:var(--bg-card);border:1px solid var(--border);border-radius:14px;overflow:hidden;transition:.2s;" onmouseover="this.style.boxShadow='0 4px 20px rgba(0,0,0,.12)'" onmouseout="this.style.boxShadow=''">
-            <div style="background:${t.color};padding:20px 18px;display:flex;align-items:center;gap:10px;">
-              <span style="font-size:32px;">${t.icon}</span>
-              <div>
-                <div style="font-size:15px;font-weight:700;color:white;">${t.title}</div>
-                <div style="font-size:11px;color:rgba(255,255,255,.8);">${t.desc.slice(0,50)}...</div>
-              </div>
-            </div>
-            <div style="padding:16px;">
-              ${livros.length>0?`<div style="margin-bottom:10px;"><div style="font-size:10px;font-weight:700;color:var(--text-muted);margin-bottom:6px;">📖 LIVROS</div>${livros.map(b=>`<div onclick="openCKBook('${b.id}')" style="font-size:12px;padding:5px 0;cursor:pointer;color:var(--green);border-bottom:1px solid var(--border);">→ ${b.title}</div>`).join('')}</div>`:''}
-              ${protos.length>0?`<div style="margin-bottom:10px;"><div style="font-size:10px;font-weight:700;color:var(--text-muted);margin-bottom:6px;">📋 PROTOCOLOS</div>${protos.map(p=>`<div onclick="openCKProtocol('${p.id}')" style="font-size:12px;padding:5px 0;cursor:pointer;color:#378ADD;border-bottom:1px solid var(--border);">→ ${p.title}</div>`).join('')}</div>`:''}
-              ${guias.length>0?`<div><div style="font-size:10px;font-weight:700;color:var(--text-muted);margin-bottom:6px;">⚡ GUIAS</div>${guias.map(g=>`<div onclick="openCKGuide('${g.id}')" style="font-size:12px;padding:5px 0;cursor:pointer;color:${t.color};border-bottom:1px solid var(--border);">→ ${g.title}</div>`).join('')}</div>`:''}
-            </div>
-          </div>`;
-        }).join('')}
-      </div>`;
-  }
-
-  function renderCKGraph() {
-    const el = document.getElementById('ck-graph-content');
-    if (!el) return;
-    const client = getActiveClient();
-    const tags   = client.tags.map(t => t.toLowerCase());
-    const allEx  = (typeof EXERCISES !== 'undefined') ? EXERCISES : [];
-
-    // Build recommendations from tag map
-    const recs = { livros:new Set(), protocolos:new Set(), guias:new Set(), trilhas:new Set() };
-    tags.forEach(tag => {
-      const map = CK_TAG_MAP[tag];
-      if (!map) return;
-      (map.livros||[]).forEach(id => recs.livros.add(id));
-      (map.protocolos||[]).forEach(id => recs.protocolos.add(id));
-      (map.guias||[]).forEach(id => recs.guias.add(id));
-      if (map.trilha) recs.trilhas.add(map.trilha);
-    });
-
-    const recBooks = [...recs.livros].map(id => CK_BOOKS.find(b=>b.id===id)).filter(Boolean);
-    const recProtos= [...recs.protocolos].map(id => CK_PROTOCOLS.find(p=>p.id===id)).filter(Boolean);
-    const recGuias = [...recs.guias].map(id => CK_GUIDES.find(g=>g.id===id)).filter(Boolean);
-    const recTrilhas= [...recs.trilhas].map(id => CK_TRILHAS.find(t=>t.id===id)).filter(Boolean);
-    const recEx    = allEx.filter(ex => (ex.tags||[]).some(t => tags.includes(t))).slice(0,8);
-
-    const hasRecs = recBooks.length + recProtos.length + recGuias.length > 0;
-
-    el.innerHTML = `
-      <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:14px;padding:20px;margin-bottom:20px;">
-        <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px;">
-          <span style="font-size:22px;">🔗</span>
-          <div>
-            <div style="font-size:15px;font-weight:700;">Conexões Inteligentes — ${client.nome}</div>
-            <div style="font-size:12px;color:var(--text-muted);">Conteúdo recomendado com base no perfil do cliente ativo</div>
-          </div>
-        </div>
-        <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px;">
-          ${client.tags.slice(0,8).map(t=>`<span style="font-size:11px;padding:4px 10px;border-radius:8px;background:rgba(29,158,117,.12);color:var(--green);border:1px solid rgba(29,158,117,.2);">#${t}</span>`).join('')}
-        </div>
-        ${!hasRecs ? '<div style="text-align:center;padding:20px;color:var(--text-muted);">Adicione observações ao cliente para ver recomendações personalizadas.</div>' : `
-        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px;">
-          ${recBooks.length>0?`<div style="background:var(--bg);border-radius:10px;padding:14px;"><div style="font-size:11px;font-weight:700;color:var(--green);margin-bottom:10px;">📖 LIVROS RECOMENDADOS</div>${recBooks.map(b=>`<div onclick="showCKTab('livros');openCKBook('${b.id}')" style="font-size:12px;padding:6px 0;cursor:pointer;border-bottom:1px solid var(--border);display:flex;gap:6px;"><span>${b.icon}</span>${b.title.slice(0,30)}</div>`).join('')}</div>`:''}
-          ${recProtos.length>0?`<div style="background:var(--bg);border-radius:10px;padding:14px;"><div style="font-size:11px;font-weight:700;color:#378ADD;margin-bottom:10px;">📋 PROTOCOLOS RECOMENDADOS</div>${recProtos.map(p=>`<div onclick="showCKTab('protocolos');openCKProtocol('${p.id}')" style="font-size:12px;padding:6px 0;cursor:pointer;border-bottom:1px solid var(--border);display:flex;gap:6px;"><span>${p.icon}</span>${p.title}</div>`).join('')}</div>`:''}
-          ${recGuias.length>0?`<div style="background:var(--bg);border-radius:10px;padding:14px;"><div style="font-size:11px;font-weight:700;color:#F59E0B;margin-bottom:10px;">⚡ GUIAS RÁPIDOS</div>${recGuias.map(g=>`<div onclick="showCKTab('guias');openCKGuide('${g.id}')" style="font-size:12px;padding:6px 0;cursor:pointer;border-bottom:1px solid var(--border);display:flex;gap:6px;"><span>${g.icon}</span>${g.title}</div>`).join('')}</div>`:''}
-          ${recEx.length>0?`<div style="background:var(--bg);border-radius:10px;padding:14px;"><div style="font-size:11px;font-weight:700;color:var(--text-muted);margin-bottom:10px;">🏋️ EXERCÍCIOS RELACIONADOS</div>${recEx.map(ex=>`<div onclick="openExModal(${ex.id})" style="font-size:12px;padding:5px 0;cursor:pointer;border-bottom:1px solid var(--border);color:var(--green);">${ex.name}</div>`).join('')}</div>`:''}
-        </div>`}
-      </div>
-      ${recTrilhas.length>0?`<div style="background:var(--bg-card);border:1px solid var(--border);border-radius:14px;padding:18px;"><div style="font-size:13px;font-weight:700;margin-bottom:12px;">🗺 Trilhas Sugeridas</div><div style="display:flex;flex-wrap:wrap;gap:10px;">${recTrilhas.map(t=>`<div onclick="showCKTab('trilhas')" style="padding:10px 16px;border-radius:10px;background:${t.color};color:white;cursor:pointer;font-size:12px;font-weight:600;">${t.icon} ${t.title}</div>`).join('')}</div></div>`:''}`;
-  }
-
-  // ── USAR NO ATENDIMENTO ────────────────────────────────────
-  function usarNoAtendimento(type, id) {
-    const client = getActiveClient();
-    let item = null;
-    let itemType = '';
-    if (type === 'book')     { item = CK_BOOKS.find(b=>b.id===id);     itemType = 'Livro'; }
-    if (type === 'protocol') { item = CK_PROTOCOLS.find(p=>p.id===id); itemType = 'Protocolo'; }
-    if (type === 'guide')    { item = CK_GUIDES.find(g=>g.id===id);    itemType = 'Guia Rápido'; }
-    if (type === 'case')     { item = CK_CASES.find(c=>c.id===id);     itemType = 'Caso Clínico'; }
-    if (!item) return;
-
-    const allEx  = (typeof EXERCISES !== 'undefined') ? EXERCISES : [];
-    const itemTags = item.tags || item.relatedTags || [];
-    const relEx = allEx.filter(ex => (ex.tags||[]).some(t => itemTags.includes(t))).slice(0,5);
-
-    // Build contextual application text
-    const appMap = {
-      'joelho':      'Foco em cadeia cinética fechada. Evitar impacto nas fases iniciais. Monitorar dor e edema.',
-      'lombar':      'Estabilização antes de carga. Bird Dog + Dead Bug como base. Sem hiperlordose.',
-      'idosos':      'Amplitude progressiva. Apoio sempre disponível. Comunicação constante sobre sensações.',
-      'hipertrofia': 'Sobrecarga progressiva com técnica perfeita. Proteína e descanso são pilares.',
-      'gestante':    'FC máx 140bpm. Sem decúbito dorsal após 20 sem. Liberação médica obrigatória.',
-      'hipertensão': 'Sem Valsalva. Preferir 12–20 reps. Monitorar PA antes e após.',
-      'emagrecimento':'Déficit calórico + treino misto. Consistência supera intensidade.',
-      'reabilitação':'Protocolo alinhado com fisioterapeuta. Progressão por critérios, não por tempo.',
-    };
-    const clientTags = client.tags.map(t=>t.toLowerCase());
-    const appTexts = Object.entries(appMap)
-      .filter(([k]) => clientTags.includes(k) || itemTags.includes(k))
-      .map(([,v]) => v).slice(0,2);
-
-    const modal = document.getElementById('ck-atendimento-modal');
-    const mc    = document.getElementById('ck-atendimento-content');
-    if (!modal||!mc) return;
-
-    mc.innerHTML = `
-      <div style="display:flex;align-items:center;gap:8px;margin-bottom:18px;padding-bottom:14px;border-bottom:1px solid var(--border);">
-        <span style="font-size:20px;">🩺</span>
-        <div style="font-size:16px;font-weight:700;">Usar no Atendimento</div>
-      </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px;">
-        <div style="background:var(--bg);border-radius:10px;padding:12px;">
-          <div style="font-size:10px;font-weight:700;color:var(--text-muted);margin-bottom:6px;">CLIENTE ATIVO</div>
-          <div style="font-size:14px;font-weight:600;">${client.nome}</div>
-          <div style="font-size:11px;color:var(--text-muted);">${client.objetivo} · ${client.nivel}</div>
-          <div style="display:flex;flex-wrap:wrap;gap:3px;margin-top:6px;">${client.tags.slice(0,4).map(t=>`<span style="font-size:10px;padding:2px 7px;border-radius:6px;background:rgba(29,158,117,.1);color:var(--green);">#${t}</span>`).join('')}</div>
-        </div>
-        <div style="background:var(--bg);border-radius:10px;padding:12px;">
-          <div style="font-size:10px;font-weight:700;color:var(--text-muted);margin-bottom:6px;">CONTEÚDO SELECIONADO</div>
-          <div style="font-size:11px;color:var(--text-muted);">${itemType}</div>
-          <div style="font-size:14px;font-weight:600;margin-top:2px;">${item.title}</div>
-        </div>
-      </div>
-      <div style="background:rgba(29,158,117,.06);border:1px solid rgba(29,158,117,.2);border-radius:10px;padding:14px;margin-bottom:14px;">
-        <div style="font-size:11px;font-weight:700;color:var(--green);margin-bottom:8px;">🤖 APLICAÇÃO PRÁTICA PARA ${client.nome.toUpperCase()}</div>
-        ${appTexts.length>0 ? appTexts.map(t=>`<div style="font-size:12px;padding:4px 0;border-bottom:1px solid rgba(29,158,117,.15);">• ${t}</div>`).join('') : '<div style="font-size:12px;color:var(--text-muted);">Aplicar o conteúdo seguindo os princípios de progressão e individualização.</div>'}
-      </div>
-      ${relEx.length>0?`<div style="margin-bottom:14px;"><div style="font-size:11px;font-weight:700;color:var(--text-muted);margin-bottom:8px;">🏋️ EXERCÍCIOS RELACIONADOS</div><div style="display:flex;flex-wrap:wrap;gap:6px;">${relEx.map(ex=>`<span onclick="openExModal(${ex.id});document.getElementById('ck-atendimento-modal').style.display='none'" style="font-size:11px;padding:5px 12px;border-radius:8px;background:rgba(29,158,117,.1);border:1px solid rgba(29,158,117,.25);color:var(--green);cursor:pointer;">${ex.name}</span>`).join('')}</div></div>`:''}
-      <div style="display:flex;gap:8px;flex-wrap:wrap;">
-        <button onclick="addClientHistoryEntry('${client.id}','atualizacao','Conteúdo aplicado: ${item.title}');updateDashboardMetrics();showToast('✓ Registrado no histórico do cliente');document.getElementById('ck-atendimento-modal').style.display='none'" style="flex:1;padding:10px;background:var(--green);color:white;border:none;border-radius:10px;font-size:12px;font-weight:600;cursor:pointer;">📝 Registrar no Histórico</button>
-        <button onclick="document.getElementById('ck-atendimento-modal').style.display='none';showPage('treino',document.querySelectorAll('.nav-item')[3])" style="flex:1;padding:10px;background:transparent;border:1px solid var(--border);color:var(--text);border-radius:10px;font-size:12px;cursor:pointer;">🏋️ Ir para Criar Treino</button>
-        <button onclick="document.getElementById('ck-atendimento-modal').style.display='none'" style="padding:10px 14px;background:transparent;border:1px solid var(--border);color:var(--text-muted);border-radius:10px;font-size:12px;cursor:pointer;">Fechar</button>
-      </div>`;
-    modal.style.display = 'flex';
-  }
-
-  // ── UPDATE showCKTab to include new tabs ───────────────────
-  // Patch existing showCKTab to add new panels
-  function showCKTab(tab) {
-    ckCurrentTab = tab;
-    const panels = ['livros','resumos','protocolos','favoritos','ia','guias','casos','trilhas','graph'];
-    panels.forEach(p => {
-      const panel = document.getElementById('ck-panel-' + p);
-      const btn   = document.getElementById('ck-tab-' + p);
-      if (!panel || !btn) return;
-      const active = p === tab;
-      panel.style.display = active ? '' : 'none';
-      btn.style.background   = active ? 'var(--green)' : 'transparent';
-      btn.style.color        = active ? 'white' : 'var(--text-muted)';
-      btn.style.borderColor  = active ? 'var(--green)' : 'var(--border)';
-    });
-    if (tab === 'livros')    renderCKBooks();
-    if (tab === 'protocolos')renderCKProtocols();
-    if (tab === 'favoritos') renderCKFavorites();
-    if (tab === 'guias')     renderCKGuides();
-    if (tab === 'casos')     renderCKCases();
-    if (tab === 'trilhas')   renderCKTrilhas();
-    if (tab === 'graph')     renderCKGraph();
-  }
-
-  // ── EXTEND initCentroConhecimento ─────────────────────────
-  function initCentroConhecimento() {
-    renderCKBooks();
-    renderCKProtocols();
-    renderCKGuides();
-    // Close modals on overlay click
-    ['ck-guide-modal','ck-atendimento-modal'].forEach(id => {
-      const el = document.getElementById(id);
-      if (el) el.addEventListener('click', e => { if(e.target===el) el.style.display='none'; });
-    });
-  }
-
-  // ── ADD "Usar no Atendimento" to existing books and protocols ─
-  // (Append buttons via post-render hooks — the modals already use openCKBook/openCKProtocol)
-
-
-  // ══ IA ASSISTENTE — LÓGICA ══════════════════════════════════
-  let iaHistory = []; // track question history in sidebar
-
-  // Update client context bar
   function updateIAContextBar() {
     const client = (typeof getActiveClient === 'function') ? getActiveClient() : null;
     if (!client) return;
-
-    const name   = document.getElementById('ia-ctx-name');
-    const obj    = document.getElementById('ia-ctx-obj');
-    const obs    = document.getElementById('ia-ctx-obs');
-    const freq   = document.getElementById('ia-ctx-freq');
-    const avatar = document.getElementById('ia-ctx-avatar');
-
-    if (name)   name.textContent   = client.nome || '—';
-    if (obj)    obj.textContent    = client.objetivo || '—';
-    if (obs)    obs.textContent    = (client.observacoes||[]).slice(0,2).map(o => typeof o === 'string' ? o : (o.text||o.obs||o.content||'')).filter(Boolean).join(' · ') || '—';
-    if (freq)   freq.textContent   = client.frequencia ? client.frequencia + 'x por semana' : '—';
-    if (avatar) avatar.textContent = (client.nome||'JP').split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase();
-
-    // Set welcome time
+    const nameEl = document.getElementById('ia-client-name');
+    const objEl  = document.getElementById('ia-client-obj');
+    const obsEl  = document.getElementById('ia-client-obs');
+    const freqEl = document.getElementById('ia-client-freq');
+    const avEl   = document.getElementById('ia-avatar');
+    if (nameEl) nameEl.innerHTML = (client.nome||'—') + ' <span style="width:7px;height:7px;border-radius:50%;background:var(--green);display:inline-block;"></span>';
+    if (objEl)  objEl.textContent  = client.objetivo || '—';
+    if (obsEl)  obsEl.textContent  = Array.isArray(client.observacoes) ? client.observacoes.slice(0,2).map(o=>typeof o==='string'?o:(o.text||'')).join(', ') : (client.observacoes||'—');
+    if (freqEl) freqEl.textContent = client.frequencia ? client.frequencia + 'x por semana' : '—';
+    if (avEl)   avEl.textContent   = (client.nome||'JP').split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase();
     const wt = document.getElementById('ia-welcome-time');
     if (wt) wt.textContent = new Date().toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'});
   }
 
-  // Clear chat
-  function clearIAChat() {
-    const msgs = document.getElementById('chat-messages');
-    if (!msgs) return;
-    // Keep only the welcome message (first child)
-    while (msgs.children.length > 1) msgs.removeChild(msgs.lastChild);
-    iaHistory = [];
-    showToast('Conversa limpa', 'info');
-  }
-
-  // Append message — redesigned
-  function appendMsg(text, role) {
-    const container = document.getElementById('chat-messages');
-    if (!container) return;
-
-    const now = new Date().toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'});
-    const client = (typeof getActiveClient === 'function') ? getActiveClient() : null;
-    const initials = client?.nome ? client.nome.split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase() : 'VC';
-
-    const row = document.createElement('div');
-
-    if (role === 'user') {
-      row.className = 'ia-msg-user';
-      row.style.cssText = 'display:flex;justify-content:flex-end;padding:0 24px;max-width:860px;margin:0 auto;width:100%;box-sizing:border-box;';
-      row.innerHTML = `
-        <div style="display:flex;flex-direction:column;align-items:flex-end;gap:4px;max-width:75%;">
-          <div style="display:flex;align-items:center;gap:8px;justify-content:flex-end;">
-            <span style="font-size:11px;color:var(--text-muted);">${now}</span>
-            <span style="font-size:13px;font-weight:700;color:var(--text);">${initials}</span>
-          </div>
-          <div style="background:var(--green);color:white;padding:12px 18px;border-radius:18px 18px 4px 18px;font-size:14px;line-height:1.6;">${text}</div>
-        </div>`;
-      // Track in history
-      iaHistory.unshift({ role:'user', text, time: now });
-      if (iaHistory.length > 10) iaHistory.pop();
-    } else {
-      row.className = 'ia-msg-ai';
-      row.style.cssText = 'display:flex;gap:12px;padding:0 24px;max-width:860px;margin:0 auto;width:100%;box-sizing:border-box;';
-
-      // Format the AI text — convert markdown-like to HTML
-      const formatted = text
-        .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-        .replace(/^### (.+)$/gm, '<div style="font-size:13px;font-weight:700;color:var(--green);margin:12px 0 6px;">$1</div>')
-        .replace(/^## (.+)$/gm, '<div style="font-size:14px;font-weight:700;margin:14px 0 6px;">$1</div>')
-        .replace(/^- (.+)$/gm, '<div style="padding:3px 0;display:flex;gap:6px;"><span style="color:var(--green);flex-shrink:0;">•</span><span>$1</span></div>')
-        .replace(/^(\d+)\. (.+)$/gm, '<div style="padding:3px 0;display:flex;gap:6px;"><span style="color:var(--green);font-weight:600;min-width:14px;">$1.</span><span>$2</span></div>')
-        .replace(/\n{2,}/g, '</p><p style="margin:8px 0 0;">')
-        .replace(/\n/g, '<br>');
-
-      row.innerHTML = `
-        <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--green) 0%,#0a6b4a 100%);display:flex;align-items:center;justify-content:center;color:white;font-size:15px;flex-shrink:0;box-shadow:0 2px 8px rgba(29,158,117,.3);">🤖</div>
-        <div style="flex:1;min-width:0;">
-          <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
-            <span style="font-size:13px;font-weight:700;color:var(--text);">NERAS IA</span>
-            <span style="font-size:11px;color:var(--text-muted);">${now}</span>
-          </div>
-          <div style="font-size:14px;line-height:1.75;color:var(--text);">${formatted}</div>
-          <div style="display:flex;gap:8px;margin-top:14px;flex-wrap:wrap;">
-            <button onclick="usarRespostaNoAtendimento(this)" class="ia-btn-secondary" style="padding:6px 12px;border-radius:8px;font-size:11px;font-weight:600;cursor:pointer;border:1px solid var(--border);background:transparent;color:var(--text);transition:.15s;display:flex;align-items:center;gap:4px;" onmouseover="this.style.borderColor='var(--green)';this.style.color='var(--green)'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--text)'">✓ Usar no atendimento</button>
-            <button onclick="enviarExerciciosTreino(this)" class="ia-btn-secondary" style="padding:6px 12px;border-radius:8px;font-size:11px;font-weight:600;cursor:pointer;border:1px solid var(--border);background:transparent;color:var(--text);transition:.15s;display:flex;align-items:center;gap:4px;" onmouseover="this.style.borderColor='var(--green)';this.style.color='var(--green)'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--text)'">↗ Enviar exercícios para treino</button>
-            <button onclick="verEvidenciasRelacionadas(this)" class="ia-btn-secondary" style="padding:6px 12px;border-radius:8px;font-size:11px;font-weight:600;cursor:pointer;border:1px solid var(--border);background:transparent;color:var(--text);transition:.15s;display:flex;align-items:center;gap:4px;" onmouseover="this.style.borderColor='var(--green)';this.style.color='var(--green)'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--text)'">🔬 Ver evidências relacionadas</button>
-          </div>
-        </div>`;
-    }
-
-    container.appendChild(row);
-    container.scrollTop = container.scrollHeight;
-  }
-
-  // ── ACTION BUTTONS ─────────────────────────────────────────
-  function usarRespostaNoAtendimento(btn) {
-    const clientId = window.globalCliente || localStorage.getItem('neras_cliente') || 'joao';
-    if (typeof addClientHistoryEntry === 'function') addClientHistoryEntry(clientId, 'insight', 'Resposta IA aplicada no atendimento');
-    showToast('✓ Registrado no histórico do cliente', 'success');
-    btn.textContent = '✓ Registrado!';
-    btn.style.color = 'var(--green)';
-    btn.style.borderColor = 'var(--green)';
-    setTimeout(() => { btn.textContent = '✓ Usar no atendimento'; btn.style.color = ''; btn.style.borderColor = ''; }, 2500);
-  }
-
-  function enviarExerciciosTreino(btn) {
-    showToast('↗ Acesse Criar Treino para adicionar exercícios', 'info');
-    setTimeout(() => showPage('treino', document.querySelectorAll('.nav-item')[3]), 600);
-  }
-
-  function verEvidenciasRelacionadas(btn) {
-    showPage('pesquisa', document.querySelectorAll('.nav-item')[5]);
-    showToast('🔬 Centro de Evidências aberto', 'info');
-  }
-
-  // ── OVERRIDE sendRealAI to add thinking indicator ──────────
-  async function sendRealAI(userMsg) {
-    const container = document.getElementById('chat-messages');
-    const client    = (typeof getActiveClient === 'function') ? getActiveClient() : null;
-    const tags      = client?.tags?.slice(0,8).join(', ') || '';
-    const obs       = (client?.observacoes||[]).slice(0,3).map(o => typeof o === 'string' ? o : (o.text||'')).join('; ') || '';
-
-    // Add thinking row
-    const thinkId = 'thinking-' + Date.now();
-    const thinkRow = document.createElement('div');
-    thinkRow.id = thinkId;
-    thinkRow.style.cssText = 'display:flex;gap:12px;padding:0 24px;max-width:860px;margin:0 auto;width:100%;box-sizing:border-box;';
-    thinkRow.innerHTML = `
-      <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--green) 0%,#0a6b4a 100%);display:flex;align-items:center;justify-content:center;color:white;font-size:15px;flex-shrink:0;">🤖</div>
-      <div style="display:flex;align-items:center;gap:10px;padding:10px 0;">
-        <div style="display:flex;gap:3px;" class="ia-thinking-dots">
-          <span></span><span></span><span></span>
-        </div>
-        <span style="font-size:12px;color:var(--text-muted);">NERAS está analisando...</span>
-      </div>`;
-    if (container) { container.appendChild(thinkRow); container.scrollTop = container.scrollHeight; }
-
-    const sistema = `Você é N.E.R.A.S — assistente científico especializado em Ciências do Exercício para personal trainers profissionais.
-NUNCA diagnostique. NUNCA substitua médico ou fisioterapeuta.
-Responda com PRECISÃO CIENTÍFICA, linguagem prática e profissional.
-Use tópicos e estrutura clara. Máximo 4 seções bem definidas.
-Quando relevante, mencione: exercícios específicos, progressão, cuidados e evidências.
-Cliente ativo: ${client?.nome||'Não definido'} | Objetivo: ${client?.objetivo||'—'} | Nível: ${client?.nivel||'—'}
-Observações: ${obs||'Nenhuma'} | Tags: ${tags||'Nenhuma'}`;
-
-    try {
-      const res = await fetch('https://api.anthropic.com/v1/messages', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          model: 'claude-sonnet-4-20250514',
-          max_tokens: 900,
-          system: sistema,
-          messages: [{ role: 'user', content: userMsg }]
-        })
+  // Init: hide all pages, show dashboard
+  (function() {
+    window.addEventListener('DOMContentLoaded', function() {
+      document.querySelectorAll('.page').forEach(function(p) {
+        if (!p.classList.contains('active')) {
+          p.style.display = 'none';
+        }
       });
-      const data = await res.json();
-      const reply = data?.content?.[0]?.text || 'Não foi possível obter resposta.';
-      const el = document.getElementById(thinkId);
-      if (el) el.remove();
-      appendMsg(reply, 'ai');
-    } catch(err) {
-      const el = document.getElementById(thinkId);
-      if (el) el.remove();
-      appendMsg('Erro de conexão. Verifique sua rede e tente novamente.', 'ai');
+    });
+  })();
+
+
+  // VOLUME por grupo muscular
+  const VOLUME_MUSCULAR = [
+    { grupo:'Peitoral', series:16, ideal:'12–20' },
+    { grupo:'Costas', series:18, ideal:'12–20' },
+    { grupo:'Ombros', series:12, ideal:'10–16' },
+    { grupo:'Bíceps', series:10, ideal:'8–16' },
+    { grupo:'Tríceps', series:10, ideal:'8–16' },
+    { grupo:'Quadríceps', series:16, ideal:'12–20' },
+    { grupo:'Posterior de Coxa', series:12, ideal:'10–16' },
+    { grupo:'Glúteos', series:12, ideal:'10–16' },
+    { grupo:'Panturrilhas', series:8, ideal:'6–12' },
+    { grupo:'Abdômen', series:8, ideal:'6–12' },
+  ];
+
+
+  // ═══════════════════════════════════════════════════════════
+  // FICHA — CONFIG POR MODALIDADE
+  // ═══════════════════════════════════════════════════════════
+  const MODALITY_FICHA = {
+    forca: {
+      label:'Musculação', icon:'🏋️', cor:'#1D9E75',
+      colunas:['Exercício','Séries','Reps','Carga (kg)','RIR'],
+      camposItem: (it) => [it.nome||it.name||'—', it.series||4, it.reps||'8–12', (it.carga||'—')+'kg', it.rir||2],
+      tecnicas:[
+        ['📈 Progressão','Sobrecarga progressiva semanal'],
+        ['📊 Volume','12–20 séries/músculo/semana'],
+        ['🎯 Intensidade','RIR 1–2 nas séries principais'],
+        ['⏱ Descanso','60–120s entre séries'],
+        ['🔄 Execução','2–0–2 (excêntrica controlada)'],
+        ['🔥 Aquecimento','Geral + específico 8–10min'],
+      ],
+      divisao:(freq) => freq>=4 ? [
+        {l:'TREINO A',s:'Push',i:['Peito','Ombros','Tríceps']},
+        {l:'TREINO B',s:'Pull',i:['Costas','Bíceps','Posterior']},
+        {l:'TREINO C',s:'Lower',i:['Quadríceps','Posterior de Coxa','Glúteos','Panturrilhas']},
+        {l:'TREINO D',s:'Misto',i:['Peito','Costas','Ombros','Braços']},
+      ] : [{l:'TREINO A',s:'Superior',i:['Peito','Costas','Ombros','Braços']},{l:'TREINO B',s:'Inferior',i:['Quadríceps','Posterior','Glúteos','Panturrilhas']}],
+      resumoIA:(obj) => 'Objetivo: <strong style="color:#1D9E75">' + obj + '</strong><br>Volume: <strong style="color:#1D9E75">Adequado</strong><br>Frequência: <strong style="color:#1D9E75">Adequada</strong><br>Distribuição: <strong style="color:#1D9E75">Equilibrada</strong><br><br><span style="color:#F59E0B">⚠ Ponto de atenção:</span> Monitorar volume para posteriores.<br><span style="color:#555">💡 Recomendação:</span> Adicionar exercício de posterior de coxa.',
+      progressao:[
+        ['Volume','100%','105%','110%','Deload 90%','Aumento progressivo'],
+        ['Carga','Base','+2,5–5%','+5–7,5%','-10–15%','Sobrecarga progressiva'],
+        ['Reps','8–12','8–12','6–10','10–15','Variação para estímulo'],
+        ['Intensidade','RIR 2','RIR 1–2','RIR 1','RIR 2–3','Ajuste de esforço'],
+        ['Descanso','60–120s','60–120s','60–120s','60–120s','Manter padrão'],
+      ],
+    },
+    powerlifting: {
+      label:'Powerlifting', icon:'🔱', cor:'#1C1C1A',
+      colunas:['Exercício','Séries','Reps','% 1RM','RPE'],
+      camposItem: (it) => [it.nome||it.name||'—', it.series||5, it.reps||'5', (it.pct1rm||'—')+'%', it.rpe||'8'],
+      tecnicas:[
+        ['📈 Método','Periodização por blocos'],
+        ['🎯 Intensidade','85–95% 1RM nos lifts principais'],
+        ['⏱ Descanso','3–5min entre séries pesadas'],
+        ['🔄 Técnica','Posição e bracing em cada rep'],
+        ['📊 Volume','Menor volume, maior intensidade'],
+        ['🔥 Aquecimento','Aquecimento específico por lift'],
+      ],
+      divisao:(freq) => [
+        {l:'TREINO A',s:'Squat Day',i:['Agachamento','Agachamento Pausa','Leg Press','Cadeira Extensora']},
+        {l:'TREINO B',s:'Bench Day',i:['Supino','Supino Pausa','Tríceps','Ombros']},
+        {l:'TREINO C',s:'Deadlift Day',i:['Terra','Terra Romeno','Costas','Puxadas']},
+      ],
+      resumoIA:(obj) => 'Objetivo: <strong style="color:#1D9E75">Força Máxima</strong><br>Lifts principais: <strong style="color:#1D9E75">Squat, Bench, Deadlift</strong><br>Método: <strong style="color:#1D9E75">Blocos de periodização</strong><br><br><span style="color:#F59E0B">⚠ Atenção:</span> Técnica antes de carga.<br><span style="color:#555">💡 Recomendação:</span> Testar 1RM a cada 6 semanas.',
+      progressao:[
+        ['Intensidade','75–80%','80–85%','85–90%','Deload 70%','Progressão de carga'],
+        ['Reps por série','5','4–5','3','5–8','Variação por bloco'],
+        ['Séries','5','4','3–4','5','Ajuste por fase'],
+        ['RPE','7','8','9','6','Controle de esforço'],
+        ['Descanso','3min','3–4min','4–5min','2–3min','Tempo completo'],
+      ],
+    },
+    calistenia: {
+      label:'Calistenia', icon:'🤸', cor:'#8B5CF6',
+      colunas:['Exercício','Progressão','Séries','Reps'],
+      camposItem: (it) => [it.nome||it.name||'—', it.progressao||'—', it.series||3, it.reps||'8–12'],
+      tecnicas:[
+        ['📈 Progressão','Variações de dificuldade do movimento'],
+        ['🎯 Controle','Foco em qualidade e controle motor'],
+        ['⏱ Descanso','60–90s entre séries'],
+        ['🔄 Tensão','Manter tensão durante todo o movimento'],
+        ['📊 Volume','3–5 séries por padrão de movimento'],
+        ['🔥 Aquecimento','Mobilidade articular + ativação'],
+      ],
+      divisao:(freq) => [
+        {l:'EMPURRÃO',s:'Push Pattern',i:['Flexão','Paralela','Pike Push-up','Handstand']},
+        {l:'PUXADA',s:'Pull Pattern',i:['Barra Fixa','Australian Pull-up','Remada Corpo']},
+        {l:'EMPURRAO PERNAS',s:'Legs',i:['Agachamento','Pistol','Nordic Curl','Ponte']},
+        {l:'CORE',s:'Core & Skills',i:['L-sit','Hollow Body','Prancha','Dragon Flag']},
+      ],
+      resumoIA:(obj) => 'Objetivo: <strong style="color:#8B5CF6">Força Relativa e Controle</strong><br>Progressão: <strong style="color:#8B5CF6">Por dificuldade do movimento</strong><br>Nível: <strong style="color:#8B5CF6">Progressivo</strong><br><br><span style="color:#F59E0B">⚠ Atenção:</span> Não avançar sem dominar a progressão atual.<br><span style="color:#555">💡 Recomendação:</span> Registrar máximo de reps por exercício.',
+      progressao:[
+        ['Dificuldade','Nível 1','Nível 2','Nível 3','Consolidação','Progressão por habilidade'],
+        ['Reps','8–12','6–10','4–8','10–15','Ajuste por nível'],
+        ['Séries','3','3–4','4','3','Volume por fase'],
+        ['Descanso','90s','90–120s','120s','60s','Tempo adequado'],
+      ],
+    },
+    funcional: {
+      label:'Funcional / HIIT', icon:'⚡', cor:'#F59E0B',
+      colunas:['Exercício','Tempo','Reps','Descanso'],
+      camposItem: (it) => [it.nome||it.name||'—', it.tempo||'40s', it.reps||'—', it.descanso||'20s'],
+      tecnicas:[
+        ['⚡ Método','Circuitos e intervalos de alta intensidade'],
+        ['🎯 FC Alvo','85–95% FC máx nos blocos de trabalho'],
+        ['⏱ Intervalos','Trabalho:Descanso = 2:1 ou 4:1'],
+        ['🔄 Padrões','Agachar, Empurrar, Puxar, Girar, Carregar'],
+        ['📊 Volume','4–6 rounds de 6–8 exercícios'],
+        ['🔥 Aquecimento','5–10min mobilidade dinâmica'],
+      ],
+      divisao:(freq) => [
+        {l:'CIRCUITO A',s:'Full Body Power',i:['Burpee','Kettlebell Swing','Box Jump','Battle Rope']},
+        {l:'CIRCUITO B',s:'Upper HIIT',i:['Push-up','Thruster','Remada','Arnold Press']},
+        {l:'CIRCUITO C',s:'Lower HIIT',i:['Jump Squat','Lunge','Step-up','Hip Thrust']},
+        {l:'CIRCUITO D',s:'Core & Cardio',i:['Mountain Climber','Russian Twist','Burpee','Skater']},
+      ],
+      resumoIA:(obj) => 'Objetivo: <strong style="color:#F59E0B">Condicionamento e Potência</strong><br>Método: <strong style="color:#F59E0B">HIIT e Circuitos</strong><br>FC média: <strong style="color:#F59E0B">80–90% FC máx</strong><br><br><span style="color:#F59E0B">⚠ Atenção:</span> Monitorar FC e sinais de overtraining.<br><span style="color:#555">💡 Recomendação:</span> 48h de descanso entre sessões intensas.',
+      progressao:[
+        ['Rounds','3','4','5','3 (Deload)','Progressão gradual'],
+        ['Trabalho','30s','40s','40s','30s','Aumento de tempo'],
+        ['Descanso','30s','20s','15s','30s','Redução progressiva'],
+        ['Intensidade','Moderada','Alta','Muito alta','Baixa','Ajuste semanal'],
+      ],
+    },
+    corrida: {
+      label:'Corrida / Atletismo', icon:'🏃', cor:'#EF4444',
+      colunas:['Atividade','Distância','Pace','FC Alvo','Descanso'],
+      camposItem: (it) => [it.nome||it.name||'—', (it.distancia||'—')+'km', it.pace||'—min/km', it.fc||'Z2–Z3', it.descanso||'—'],
+      tecnicas:[
+        ['🏃 Método','Periodização por zonas de FC'],
+        ['🎯 Zonas','Z1 (fácil) a Z5 (máximo)'],
+        ['⏱ Sessões','3–5x semana, alternando intensidade'],
+        ['📊 Volume','Aumento de 10% por semana no máximo'],
+        ['🔄 Tipos','Contínuo, intervalado, fartlek, tempo'],
+        ['🔥 Aquecimento','5–10min caminhada + mobilidade'],
+      ],
+      divisao:(freq) => [
+        {l:'FÁCIL',s:'Z1–Z2 Aeróbio Base',i:['Corrida leve 30–60min','Pace conversacional','FC 60–70% máx']},
+        {l:'TEMPO',s:'Z3–Z4 Limiar',i:['Corrida tempo 20–40min','Pace moderado-forte','FC 75–85% máx']},
+        {l:'INTERVALADO',s:'Z4–Z5 VO2Max',i:['Repetições 400–1000m','Pace 5K ou mais rápido','FC >85% máx']},
+        {l:'LONGO',s:'Z2 Resistência',i:['Corrida longa 60–120min','Pace lento','FC <75% máx']},
+      ],
+      resumoIA:(obj) => 'Objetivo: <strong style="color:#EF4444">Resistência Aeróbia</strong><br>Volume semanal: <strong style="color:#EF4444">Adequado</strong><br>Distribuição de zonas: <strong style="color:#EF4444">Equilibrada</strong><br><br><span style="color:#F59E0B">⚠ Atenção:</span> Não aumentar volume mais de 10%/semana.<br><span style="color:#555">💡 Recomendação:</span> Incluir trabalho de mobilidade e core.',
+      progressao:[
+        ['Volume','Base','+10%','+10%','Deload -20%','Regra dos 10%'],
+        ['Sessões/sem','3','3–4','4','3','Progressão gradual'],
+        ['Long run','60min','75min','90min','60min','Distância base'],
+        ['Intensidade','Z1–Z2','Z2–Z3','Z3–Z4','Z1–Z2','Periodização'],
+      ],
+    },
+    natacao: {
+      label:'Natação', icon:'🏊', cor:'#3B82F6',
+      colunas:['Atividade','Metros','Tempo','Descanso','Intensidade'],
+      camposItem: (it) => [it.nome||it.name||'—', (it.metros||'—')+'m', it.tempo||'—', it.descanso||'—', it.intensidade||'Moderada'],
+      tecnicas:[
+        ['🏊 Técnica','Posição corporal e bracada eficiente'],
+        ['🎯 Estilos','Crawl, costas, peito, borboleta'],
+        ['⏱ Intervalos','Trabalho por série de distâncias'],
+        ['📊 Volume','1500–4000m por sessão'],
+        ['🔄 Variedade','Alternar estilos e intensidades'],
+        ['🔥 Aquecimento','200–400m leve + drills técnicos'],
+      ],
+      divisao:(freq) => [
+        {l:'TÉCNICO',s:'Drills e Posição',i:['Kickboard','Pull buoy','Drills de bracada','Kick sets']},
+        {l:'AERÓBIO',s:'Base Aeróbia',i:['Crawl contínuo','Séries longas','Pace constante']},
+        {l:'INTERVALADO',s:'Velocidade',i:['Sprints 25m','Séries 50–100m','Descanso completo']},
+        {l:'RESISTÊNCIA',s:'Fundo',i:['Série longa 800–1500m','Pace moderado','Foco em endurance']},
+      ],
+      resumoIA:(obj) => 'Objetivo: <strong style="color:#3B82F6">Condicionamento Aquático</strong><br>Volume: <strong style="color:#3B82F6">Adequado</strong><br>Técnica: <strong style="color:#3B82F6">Em desenvolvimento</strong><br><br><span style="color:#F59E0B">⚠ Atenção:</span> Técnica incorreta gera lesões de ombro.<br><span style="color:#555">💡 Recomendação:</span> Incluir sessão de drills semanalmente.',
+      progressao:[
+        ['Volume','1500m','2000m','2500m','1500m (deload)','Progressão semanal'],
+        ['Intensidade','Z2','Z2–Z3','Z3','Z1','Zonas aeróbias'],
+        ['Estilos','1 estilo','2 estilos','2–3 estilos','1 estilo','Variedade técnica'],
+      ],
+    },
+    lutas: {
+      label:'Lutas / Artes Marciais', icon:'🥊', cor:'#DC2626',
+      colunas:['Atividade','Duração','Rounds','Descanso'],
+      camposItem: (it) => [it.nome||it.name||'—', it.duracao||'3min', it.rounds||3, it.descanso||'1min'],
+      tecnicas:[
+        ['🥊 Técnica','Golpes, esquivas e posicionamento'],
+        ['🎯 Condicionamento','Resistência específica para combate'],
+        ['⏱ Rounds','3–5min trabalho / 1min descanso'],
+        ['📊 Volume','60–90min total por sessão'],
+        ['🔄 Sparring','Controlado com progressão de intensidade'],
+        ['🔥 Aquecimento','Mobilidade + shadow boxing 5–10min'],
+      ],
+      divisao:(freq) => [
+        {l:'TÉCNICA',s:'Golpes e Defesa',i:['Shadow boxing','Saco de pancadas','Mitts','Drills técnicos']},
+        {l:'SPARRING',s:'Combate Simulado',i:['Sparring leve','Sparring técnico','Grappling']},
+        {l:'CONDICIONAMENTO',s:'Físico Específico',i:['Circuit training','Pular corda','Sprints','Bag work']},
+        {l:'GROUND',s:'Trabalho de Chão',i:['Grappling','Submissions','Posicionamento','Guard']},
+      ],
+      resumoIA:(obj) => 'Objetivo: <strong style="color:#DC2626">Condicionamento para Combate</strong><br>Técnica: <strong style="color:#DC2626">Em progressão</strong><br>Condicionamento: <strong style="color:#DC2626">Adequado</strong><br><br><span style="color:#F59E0B">⚠ Atenção:</span> Sparring apenas com parceiros controlados.<br><span style="color:#555">💡 Recomendação:</span> Priorizar técnica antes de intensidade.',
+      progressao:[
+        ['Intensidade','Técnico','Moderado','Intenso','Recuperação','Periodização combate'],
+        ['Rounds','3x3min','4x3min','5x3min','3x2min','Aumento gradual'],
+        ['Sparring','0%','20%','40%','10%','Introdução progressiva'],
+      ],
+    },
+    ciclismo: {
+      label:'Ciclismo', icon:'🚴', cor:'#F59E0B',
+      colunas:['Atividade','Distância','Tempo','Cadência','Zona'],
+      camposItem: (it) => [it.nome||it.name||'—', (it.distancia||'—')+'km', it.tempo||'—', (it.cadencia||'—')+'rpm', it.zona||'Z2'],
+      tecnicas:[
+        ['🚴 Técnica','Pedalada circular e posição no selim'],
+        ['🎯 Potência','Watt e cadência como métricas chave'],
+        ['⏱ Zonas','Z1 (recuperação) a Z6 (neuromuscular)'],
+        ['📊 Volume','TSS (Training Stress Score) semanal'],
+        ['🔄 Tipos','Estrada, MTB, indoor, critérium'],
+        ['🔥 Aquecimento','10–15min Z1 + acelerações'],
+      ],
+      divisao:(freq) => [
+        {l:'BASE',s:'Aeróbio Z2',i:['Pedalada longa Z2','Cadência 90–95rpm','HR constante','2–3h']},
+        {l:'INTERVALADO',s:'VO2Max Z4–Z5',i:['Séries 4–8min','Potência >FTP','Descanso 1:1']},
+        {l:'TEMPO',s:'Limiar Z3–Z4',i:['20–40min @ FTP','Cadência 80–85rpm','Pace estável']},
+        {l:'FORÇA',s:'Força na Pedalada',i:['Morro pesado','Cadência baixa','Alta resistência']},
+      ],
+      resumoIA:(obj) => 'Objetivo: <strong style="color:#F59E0B">Resistência Aeróbia sobre a Bike</strong><br>Volume: <strong style="color:#F59E0B">Adequado</strong><br>Distribuição de zonas: <strong style="color:#F59E0B">80/20 (Polarizado)</strong><br><br><span style="color:#F59E0B">⚠ Atenção:</span> Ajuste de bike evita lesões de joelho e lombar.<br><span style="color:#555">💡 Recomendação:</span> Incluir treino de força complementar.',
+      progressao:[
+        ['Volume (km)','Base','+10%','+15%','Deload -30%','Progressão TSS'],
+        ['Intensidade','Z2','Z2–Z3','Z3–Z4','Z1','Polarizado'],
+        ['Treinos/sem','3','3–4','4','2–3','Frequência'],
+      ],
+    },
+    fisioterapia: {
+      label:'Fisioterapia / Reabilitação', icon:'🏥', cor:'#10B981',
+      colunas:['Exercício','Séries','Reps','Tempo','Nível de Dor (0–10)'],
+      camposItem: (it) => [it.nome||it.name||'—', it.series||3, it.reps||'12–15', it.tempo||'—', '0–3/10'],
+      tecnicas:[
+        ['🏥 Protocolo','Alinhado com fisioterapeuta responsável'],
+        ['🎯 Dor','Parar se dor >3/10 durante exercício'],
+        ['⏱ Progressão','Critérios funcionais, não tempo'],
+        ['📊 Carga','Início com peso corporal ou mínimo'],
+        ['🔄 Fases','Controle → Fortalecimento → Funcional'],
+        ['🔥 Atenção','Jamais substituir acompanhamento médico'],
+      ],
+      divisao:(freq) => [
+        {l:'FASE 1',s:'Controle da Dor e ROM',i:['Mobilidade passiva','Isométricos','Crioterapia','Eletroestimulação']},
+        {l:'FASE 2',s:'Fortalecimento Inicial',i:['Exercícios de baixa carga','Isotônicos controlados','Propriocepção']},
+        {l:'FASE 3',s:'Fortalecimento Progressivo',i:['Carga progressiva','Exercícios funcionais','Atividades específicas']},
+        {l:'FASE 4',s:'Retorno Funcional',i:['Exercícios específicos do esporte/vida','Testes funcionais','Critérios de alta']},
+      ],
+      resumoIA:(obj) => 'Objetivo: <strong style="color:#10B981">Reabilitação e Retorno Funcional</strong><br>Fase atual: <strong style="color:#10B981">Em avaliação</strong><br>Progressão: <strong style="color:#10B981">Por critérios funcionais</strong><br><br><span style="color:#EF4444">🚨 IMPORTANTE:</span> Protocolo deve ser validado por fisioterapeuta.<br><span style="color:#555">💡 Recomendação:</span> Nunca ultrapassar 3/10 de dor durante o exercício.',
+      progressao:[
+        ['Fase','1: Controle','2: Força inicial','3: Funcional','4: Retorno','Progressão por critérios'],
+        ['Carga','Mínima','Leve','Moderada','Específica','Baseada em sintomas'],
+        ['Dor máx','2/10','2–3/10','3/10','1–2/10','Monitoramento contínuo'],
+      ],
+    },
+    gestante: {
+      label:'Gestante', icon:'🤰', cor:'#EC4899',
+      colunas:['Exercício','Séries','Reps','Intensidade','Obs'],
+      camposItem: (it) => [it.nome||it.name||'—', it.series||3, it.reps||'12–15', 'Leve–Moderada', it.obs||'FC <140bpm'],
+      tecnicas:[
+        ['🤰 FC Alvo','Máximo 140bpm durante o exercício'],
+        ['🎯 Posição','Sem decúbito dorsal após 20ª semana'],
+        ['⏱ Duração','30–45min por sessão, 3–4x/semana'],
+        ['📊 Intensidade','RPE 12–14 (Escala de Borg)'],
+        ['🔄 Adaptação','Progressão deve regredir conforme gestação avança'],
+        ['🚨 Parar se','Dor, sangramento, contrações ou dispneia'],
+      ],
+      divisao:(freq) => [
+        {l:'1º TRIMESTRE',s:'Adaptação',i:['Caminhada','Mobilidade suave','Respiração diafragmática','Exercícios leves']},
+        {l:'2º TRIMESTRE',s:'Fortalecimento Leve',i:['Agachamento assistido','Ponte glúteo','Remada elástico','Kegel']},
+        {l:'3º TRIMESTRE',s:'Conforto',i:['Mobilidade pélvica','Respiração para parto','Exercícios suaves','Hidroterapia']},
+        {l:'PÓS-PARTO',s:'Retorno Gradual',i:['Kegel','Core profundo','Progressão gradual após liberação médica']},
+      ],
+      resumoIA:(obj) => 'Objetivo: <strong style="color:#EC4899">Saúde Materna e Fetal</strong><br>Trimestre: <strong style="color:#EC4899">Adaptado</strong><br>Segurança: <strong style="color:#EC4899">Monitorada</strong><br><br><span style="color:#EF4444">🚨 OBRIGATÓRIO:</span> Liberação médica antes de iniciar ou continuar.<br><span style="color:#555">💡 Recomendação:</span> Priorizar conforto e escutar sinais do corpo.',
+      progressao:[
+        ['Fase','1º Tri','2º Tri','3º Tri','Pós-parto','Adaptação gestacional'],
+        ['Intensidade','Leve','Leve–Mod','Muito Leve','Gradual','RPE 12–14'],
+        ['FC máx','140bpm','140bpm','130bpm','Variável','Monitoramento constante'],
+      ],
+    },
+    idosos: {
+      label:'Idosos / Terceira Idade', icon:'🧓', cor:'#8B5CF6',
+      colunas:['Exercício','Séries','Reps','Velocidade','Apoio'],
+      camposItem: (it) => [it.nome||it.name||'—', it.series||3, it.reps||'10–15', 'Lenta e Controlada', 'Disponível'],
+      tecnicas:[
+        ['🧓 Velocidade','Movimentos lentos e controlados'],
+        ['🎯 Equilíbrio','Incluir treino proprioceptivo semanal'],
+        ['⏱ Descanso','90s–2min entre séries'],
+        ['📊 Volume','Menor volume, maior frequência'],
+        ['🔄 Funcional','Priorizar movimentos do cotidiano (AVD)'],
+        ['🚨 Segurança','Apoio sempre disponível, ambiente seguro'],
+      ],
+      divisao:(freq) => [
+        {l:'SESSÃO A',s:'Membros Inferiores',i:['Agachamento assistido','Extensão joelho','Leg Press','Equilíbrio unilateral']},
+        {l:'SESSÃO B',s:'Membros Superiores',i:['Remada elástico','Press ombro','Rosca haltere','Tríceps corda']},
+        {l:'SESSÃO C',s:'Mobilidade e Equilíbrio',i:['Mobilidade articular','Cat-Camel','Equilíbrio bipodal→unipodal','Marcha estacionária']},
+        {l:'SESSÃO D',s:'Funcional',i:['Sentar e levantar','Subir e descer escadas','Carregamento bilateral','Caminhada']},
+      ],
+      resumoIA:(obj) => 'Objetivo: <strong style="color:#8B5CF6">Autonomia e Qualidade de Vida</strong><br>Prevenção de quedas: <strong style="color:#8B5CF6">Alta prioridade</strong><br>Progressão: <strong style="color:#8B5CF6">Muito gradual</strong><br><br><span style="color:#F59E0B">⚠ Atenção:</span> Monitorar PA antes e após exercício.<br><span style="color:#555">💡 Recomendação:</span> Incluir caminhada como atividade complementar.',
+      progressao:[
+        ['Fase','Adaptação','Fortalecimento','Funcional','Manutenção','Progressão lenta'],
+        ['Carga','Corporal','Leve','Leve–Mod','Moderada','2 semanas por fase'],
+        ['Equilíbrio','Bipodal','Semitandem','Unipodal','Dinâmico','Progressão proprioceptiva'],
+      ],
+    },
+    pcd: {
+      label:'Adaptado / PcD', icon:'♿', cor:'#0EA5E9',
+      colunas:['Exercício','Séries','Reps','Adaptação','Apoio'],
+      camposItem: (it) => [it.nome||it.name||'—', it.series||3, it.reps||'10–15', it.adaptacao||'Individualizada', 'Conforme necessário'],
+      tecnicas:[
+        ['♿ Adaptação','Individualizar para cada condição e funcionalidade'],
+        ['🎯 Foco','Potencial funcional e autonomia'],
+        ['⏱ Ritmo','Respeitar o tempo individual do aluno'],
+        ['📊 Metas','Baseadas em funcionalidade, não comparação'],
+        ['🔄 Equipamentos','Adaptar conforme disponibilidade e necessidade'],
+        ['🤝 Multidisciplinar','Alinhamento com equipe de saúde'],
+      ],
+      divisao:(freq) => [
+        {l:'FORÇA FUNCIONAL',s:'Membros Ativos',i:['Adaptado ao nível funcional','Exercícios de empurrar','Exercícios de puxar','Estabilização']},
+        {l:'CARDIO ADAPTADO',s:'Condicionamento',i:['Ergômetro de braço','Handbike','Natação adaptada','Circuito adaptado']},
+        {l:'MOBILIDADE',s:'Amplitude e Postura',i:['Mobilidade dos segmentos disponíveis','Postura e alinhamento','Prevenção de contraturas']},
+        {l:'FUNCIONAL',s:'Atividades de Vida Diária',i:['Transferências','Propulsão de cadeira','Atividades manuais','Independência']},
+      ],
+      resumoIA:(obj) => 'Objetivo: <strong style="color:#0EA5E9">Autonomia e Inclusão</strong><br>Adaptação: <strong style="color:#0EA5E9">Individualizada</strong><br>Abordagem: <strong style="color:#0EA5E9">Centrada na funcionalidade</strong><br><br><span style="color:#EF4444">🚨 ESSENCIAL:</span> Conhecer diagnóstico e limitações antes de prescrever.<br><span style="color:#555">💡 Recomendação:</span> Trabalho multidisciplinar com equipe de saúde.',
+      progressao:[
+        ['Fase','Avaliação','Adaptação','Progressão','Manutenção','Individual'],
+        ['Foco','Funcional','Funcional','Funcional+Força','Funcional','Baseado em capacidade'],
+        ['Frequência','2x/sem','3x/sem','3–4x/sem','3x/sem','Tolerância individual'],
+      ],
+    },
+    yoga: {
+      label:'Yoga / Meditação', icon:'🧘', cor:'#7C3AED',
+      colunas:['Postura','Duração','Nível','Respiração'],
+      camposItem: (it) => [it.nome||it.name||'—', it.tempo||'60s', it.nivel||'Básico', 'Ujjayi'],
+      tecnicas:[
+        ['🧘 Respiração','Ujjayi — respiração controlada nasal'],
+        ['🎯 Presença','Foco na sensação e alinhamento corporal'],
+        ['⏱ Ritmo','Movimentos lentos e sincronizados com a respiração'],
+        ['📊 Sequências','Fluxo lógico de posturas (Sun Salutation, etc)'],
+        ['🔄 Estilos','Hatha, Vinyasa, Yin, Ashtanga'],
+        ['🔥 Aquecimento','Respiração + aquecimento articular'],
+      ],
+      divisao:(freq) => [
+        {l:'STANDING',s:'Posturas em Pé',i:['Tadasana','Virabhadrasana','Trikonasana','Utkatasana']},
+        {l:'SEATED',s:'Posturas Sentadas',i:['Paschimottanasana','Janu Sirsasana','Baddha Konasana','Navasana']},
+        {l:'SUPINE',s:'Posturas Deitadas',i:['Setu Bandha','Supta Matsyendrasana','Savasana','Viparita Karani']},
+        {l:'CORE',s:'Força e Equilíbrio',i:['Plank','Side Plank','Boat Pose','Bakasana']},
+      ],
+      resumoIA:(obj) => 'Objetivo: <strong style="color:#7C3AED">Flexibilidade e Equilíbrio Mental</strong><br>Nível: <strong style="color:#7C3AED">Em progressão</strong><br>Prática: <strong style="color:#7C3AED">Regular</strong><br><br><span style="color:#F59E0B">⚠ Atenção:</span> Não forçar amplitude além do confortável.<br><span style="color:#555">💡 Recomendação:</span> Prática diária de 15–30min traz resultados consistentes.',
+      progressao:[
+        ['Semana','1','2','3','4','Progressão'],
+        ['Duração','30min','45min','60min','60min','Aumento gradual'],
+        ['Complexidade','Básico','Básico–Intermediário','Intermediário','Consolidação','Progressão de posturas'],
+      ],
+    },
+    mobilidade: {
+      label:'Mobilidade / Flexibilidade', icon:'🔄', cor:'#06B6D4',
+      colunas:['Exercício','Séries','Duração','Região','Obs'],
+      camposItem: (it) => [it.nome||it.name||'—', it.series||3, it.tempo||'30–60s', it.regiao||'—', it.obs||'Sem dor'],
+      tecnicas:[
+        ['🔄 Método','FNP, alongamento ativo, mobilização articular'],
+        ['🎯 Amplitude','Trabalhar no limite confortável, nunca com dor'],
+        ['⏱ Sustentação','Manter 30–60s por posição'],
+        ['📊 Frequência','5–7x/semana para resultados consistentes'],
+        ['🔄 Tipos','Estático, dinâmico, PNF, myofascial'],
+        ['🔥 Aquecimento','5min leve antes do trabalho de mobilidade'],
+      ],
+      divisao:(freq) => [
+        {l:'QUADRIL',s:'Mobilidade de Quadril',i:['90/90','Pigeon Pose','Hip Flexor Stretch','Frog Stretch']},
+        {l:'TÓRAX',s:'Mobilidade Torácica',i:['Cat-Camel','Rotação torácica','Thread the Needle','Extension on foam roller']},
+        {l:'OMBROS',s:'Mobilidade de Ombros',i:['Shoulder CARs','Wall Slides','Pec Stretch','Doorway Stretch']},
+        {l:'TORNOZELOS',s:'Mobilidade de Tornozelos',i:['Knee to Wall','Ankle Circles','Calf Stretch','Dorsiflexão']},
+      ],
+      resumoIA:(obj) => 'Objetivo: <strong style="color:#06B6D4">Amplitude de Movimento e Prevenção</strong><br>Consistência: <strong style="color:#06B6D4">Fundamental</strong><br>Progressão: <strong style="color:#06B6D4">Gradual e contínua</strong><br><br><span style="color:#F59E0B">⚠ Atenção:</span> Dor é sinal de parar — não de progressão.<br><span style="color:#555">💡 Recomendação:</span> Combinar mobilidade com fortalecimento para resultados duradouros.',
+      progressao:[
+        ['Semana','1','2','3','4','Progressão'],
+        ['Duração/posição','30s','45s','60s','60s','Aumento gradual'],
+        ['Regiões','2–3','3–4','4–5','4–5 (consolidação)','Progressão de área'],
+      ],
+    },
+    futebol: {
+      label:'Futebol', icon:'⚽', cor:'#22C55E',
+      colunas:['Atividade','Duração','Espaço','Jogadores','Objetivo'],
+      camposItem: (it) => [it.nome||it.name||'—', it.duracao||'10min', it.espaco||'—', it.jogadores||'—', it.objetivo||'—'],
+      tecnicas:[
+        ['⚽ Técnica','Condução, passe, chute e proteção de bola'],
+        ['🎯 Tático','Posicionamento e leitura de jogo'],
+        ['⏱ Intensidade','Alta intensidade intermitente (HIIT esportivo)'],
+        ['📊 Periodização','Microciclo semanal baseado em jogo'],
+        ['🔄 Físico','Velocidade, agilidade, resistência e força'],
+        ['🔥 Aquecimento','Ativação dinâmica + rondinha'],
+      ],
+      divisao:(freq) => [
+        {l:'TÉCNICO',s:'Habilidades Individuais',i:['Condução','Passe curto e longo','Finalização','Drible']},
+        {l:'TÁTICO',s:'Coletivo',i:['Posse de bola','Pressão alta','Transição','Bola parada']},
+        {l:'FÍSICO',s:'Condicionamento',i:['Sprint','Agilidade','Resistência aeróbia','Força explosiva']},
+        {l:'JOGO',s:'Aplicação Real',i:['Jogo reduzido','Jogo treino','Situações de jogo','Avaliação']},
+      ],
+      resumoIA:(obj) => 'Objetivo: <strong style="color:#22C55E">Performance no Futebol</strong><br>Técnica: <strong style="color:#22C55E">Em desenvolvimento</strong><br>Tática: <strong style="color:#22C55E">Sendo trabalhada</strong><br><br><span style="color:#F59E0B">⚠ Atenção:</span> Periodizar respeitando dias de jogo.<br><span style="color:#555">💡 Recomendação:</span> Integrar trabalho físico com treino técnico-tático.',
+      progressao:[
+        ['Fase','Pré-temporada','In-season','In-season','Pós-season','Periodização anual'],
+        ['Foco','Físico','Técnico-tático','Manutenção','Recuperação','Ciclo anual'],
+        ['Intensidade','Alta','Moderada–Alta','Manutenção','Baixa','Baseada no calendário'],
+      ],
+    },
+    basquete: {
+      label:'Basquete', icon:'🏀', cor:'#EA580C',
+      colunas:['Atividade','Duração','Jogadores','Intensidade','Objetivo'],
+      camposItem: (it) => [it.nome||it.name||'—', it.duracao||'10min', it.jogadores||'—', it.intensidade||'Alta', it.objetivo||'—'],
+      tecnicas:[
+        ['🏀 Técnica','Arremesso, drible, passe e movimentação'],
+        ['🎯 Específico','Saídas de bola, defesa individual e de zona'],
+        ['⏱ Físico','Potência e velocidade para 40min intensos'],
+        ['📊 Condicionamento','Intermitente de alta intensidade'],
+        ['🔄 Força','Membros inferiores para salto e aceleração'],
+        ['🔥 Aquecimento','Mobilidade + drills específicos'],
+      ],
+      divisao:(freq) => [
+        {l:'TÉCNICO',s:'Fundamentos',i:['Arremesso (catch and shoot)','Drible (mão forte e fraca)','Passe (chest, bounce, overhead)','Movimentação sem bola']},
+        {l:'TÁTICO',s:'Sistema de Jogo',i:['Ataque no half-court','Defesa individual','Fast break','Bola parada']},
+        {l:'FÍSICO',s:'Condicionamento',i:['Salto (vertical)','Sprint e agilidade','Resistência específica','Força funcional']},
+        {l:'JOGO',s:'Aplicação',i:['3x3','5x5 treino','Situações','Análise de vídeo']},
+      ],
+      resumoIA:(obj) => 'Objetivo: <strong style="color:#EA580C">Performance no Basquete</strong><br>Fundamentos: <strong style="color:#EA580C">Em desenvolvimento</strong><br>Condicionamento: <strong style="color:#EA580C">Adequado</strong><br><br><span style="color:#F59E0B">⚠ Atenção:</span> Periodizar em função do calendário de jogos.<br><span style="color:#555">💡 Recomendação:</span> Focar em salto vertical e mudança de direção.',
+      progressao:[
+        ['Fase','Pré-temporada','Pré-season','In-season','Playoffs','Periodização'],
+        ['Foco','Físico','Técnico','Manutenção','Peak','Calendário competitivo'],
+      ],
+    },
+    volei: {
+      label:'Vôlei', icon:'🏐', cor:'#3B82F6',
+      colunas:['Atividade','Duração','Jogadores','Observação'],
+      camposItem: (it) => [it.nome||it.name||'—', it.duracao||'15min', it.jogadores||'—', it.obs||'—'],
+      tecnicas:[
+        ['🏐 Técnica','Saque, recepção, levantamento, ataque, bloqueio'],
+        ['🎯 Sistema','6x6, com rotações e cobertura'],
+        ['⏱ Físico','Saltabilidade e velocidade de reação'],
+        ['📊 Potência','Força explosiva para salto e ataque'],
+        ['🔄 Comunicação','Verbal e visual entre os atletas'],
+        ['🔥 Aquecimento','Mobilidade + toque técnico suave'],
+      ],
+      divisao:(freq) => [
+        {l:'TÉCNICO',s:'Fundamentos',i:['Saque (float e jump)','Recepção (manchete)','Levantamento','Ataque (cortada)','Bloqueio']},
+        {l:'FÍSICO',s:'Condicionamento',i:['Salto vertical','Sprint lateral','Força explosiva','Core estabilizador']},
+        {l:'COLETIVO',s:'Sistema de Jogo',i:['Recepção e passe','Sistemas de ataque','Cobertura de bloqueio','Rotações']},
+        {l:'JOGO',s:'Aplicação',i:['3x3','6x6 treino','Situações de jogo','Análise']},
+      ],
+      resumoIA:(obj) => 'Objetivo: <strong style="color:#3B82F6">Performance no Vôlei</strong><br>Técnica: <strong style="color:#3B82F6">Em progressão</strong><br>Físico: <strong style="color:#3B82F6">Adequado</strong><br><br><span style="color:#F59E0B">⚠ Atenção:</span> Atenção a ombros e joelhos por volume de salto.<br><span style="color:#555">💡 Recomendação:</span> Fortalecer manguito rotador e cadeia posterior.',
+      progressao:[
+        ['Fase','Pré-temporada','In-season','In-season','Pós-season','Periodização'],
+        ['Foco','Físico','Técnico','Manutenção','Recuperação','Calendário'],
+      ],
+    },
+    tenis: {
+      label:'Tênis', icon:'🎾', cor:'#CA8A04',
+      colunas:['Atividade','Duração','Bolas','Intensidade'],
+      camposItem: (it) => [it.nome||it.name||'—', it.duracao||'20min', it.bolas||'—', it.intensidade||'Moderada'],
+      tecnicas:[
+        ['🎾 Técnica','Forehand, backhand, saque, voleio, smash'],
+        ['🎯 Tático','Padrões de jogo e tomada de decisão'],
+        ['⏱ Físico','Explosão e resistência para rallies longos'],
+        ['📊 Específico','Movimentação lateral e recuperação de centro'],
+        ['🔄 Footwork','Passos de ajuste e posicionamento'],
+        ['🔥 Aquecimento','Mobilidade de ombro + aquecimento progressivo'],
+      ],
+      divisao:(freq) => [
+        {l:'TÉCNICO',s:'Golpes Base',i:['Forehand (slice e topspin)','Backhand (uma e duas mãos)','Saque (flat, slice, kick)','Voleio e smash']},
+        {l:'TÁTICO',s:'Padrões de Jogo',i:['Saque e voleio','Baseline rally','Down the line vs cross-court','Return of serve']},
+        {l:'FÍSICO',s:'Condicionamento Específico',i:['Movimentação lateral','Sprint curto (5–10m)','Agilidade com cone','Força de ombro']},
+        {l:'JOGO',s:'Competição Simulada',i:['Set practice','Situações de jogo','Análise tática','Match play']},
+      ],
+      resumoIA:(obj) => 'Objetivo: <strong style="color:#CA8A04">Performance no Tênis</strong><br>Técnica: <strong style="color:#CA8A04">Em desenvolvimento</strong><br>Tático: <strong style="color:#CA8A04">Em construção</strong><br><br><span style="color:#F59E0B">⚠ Atenção:</span> Cuidado com epicondilite (cotovelo de tenista).<br><span style="color:#555">💡 Recomendação:</span> Fortalecer manguito rotador e antebraço.',
+      progressao:[
+        ['Fase','Iniciante','Desenvolvimento','Intermediário','Competição','Progressão técnica'],
+        ['Foco','Técnica básica','Consistência','Padrões táticos','Performance','Periodização'],
+      ],
+    },
+  };
+
+  // Helper: get modality config (fallback to forca)
+  function getModalidadeFicha(mod) {
+    return MODALITY_FICHA[mod] || MODALITY_FICHA['forca'];
+  }
+
+  // ═══════════════════════════════════════════════════════════════
+  // FICHA DE TREINO INTELIGENTE
+  // ═══════════════════════════════════════════════════════════════
+
+  // Cuidados por tag
+  const CUIDADOS_MAP = {
+    'Hipertensão':    { icon:'❤️', items:['Evitar manobra de Valsalva.','Monitorar pressão arterial antes e após.','Preferir 12–20 repetições.'] },
+    'joelho':         { icon:'🦵', items:['Evitar impactos excessivos.','Controlar amplitude de movimento.','Monitorar dor durante o exercício.'] },
+    'gestante':       { icon:'🤰', items:['Evitar posição supina prolongada.','FC máx 140bpm.','Parar se sentir dor ou contrações.'] },
+    'TDAH':           { icon:'🧠', items:['Sessões curtas e variadas.','Feedback constante.','Evitar longas esperas entre exercícios.'] },
+    'lombar':         { icon:'🔴', items:['Manter coluna neutra.','Evitar hiperlordose.','Priorizar estabilização de core.'] },
+    'reabilitação':   { icon:'🏥', items:['Protocolo alinhado com fisioterapeuta.','Nunca ultrapassar 3/10 de dor.','Progressão muito gradual.'] },
+  };
+
+  // Alternativas de exercícios
+  const ALTERNATIVAS_MAP = {
+    'Supino Reto':          ['Supino Halteres','Flexão','Supino Máquina'],
+    'Agachamento Livre':    ['Leg Press','Hack Machine','Goblet Squat'],
+    'Remada Curvada':       ['Remada Unilateral','Remada Baixa','Remada Máquina'],
+    'Desenvolvimento':      ['Desenvolvimento Halteres','Arnold Press','Elevação Frontal'],
+    'Rosca Direta':         ['Rosca Alternada','Rosca Concentrada','Rosca Martelo'],
+    'Tríceps Pulley':       ['Tríceps Francês','Mergulho','Extensão com Haltere'],
+    'Levantamento Terra':   ['Stiff','Good Morning','Hiperextensão'],
+    'Puxada Frente':        ['Puxada Pronada','Puxada Supinada','Remada na Polia'],
+  };
+
+  // localStorage fichas
+  function getFichas() {
+    try { return JSON.parse(localStorage.getItem('neras_fichas') || '[]'); } catch(e) { return []; }
+  }
+  function saveFichas(fichas) {
+    localStorage.setItem('neras_fichas', JSON.stringify(fichas));
+  }
+  function salvarFicha(clientId, nome, count) {
+    const fichas = getFichas();
+    const ficha = {
+      id: 'ficha-' + Date.now(),
+      clientId, nome, count,
+      date: new Date().toLocaleDateString('pt-BR'),
+      timestamp: Date.now(),
+      items: JSON.parse(JSON.stringify(typeof treinoItems !== 'undefined' ? treinoItems : [])),
+      modality: typeof currentModality !== 'undefined' ? currentModality : 'forca',
+    };
+    fichas.unshift(ficha);
+    if (fichas.length > 50) fichas.pop();
+    saveFichas(fichas);
+  }
+
+  // Checklist state
+  let fichaCheckState = {};
+
+  function abrirFichaInteligenteModal() {
+    const clientId = window.globalCliente || localStorage.getItem('neras_cliente') || 'joao';
+    const client   = (typeof drawerData !== 'undefined') ? drawerData[clientId] : null;
+    const items    = typeof treinoItems !== 'undefined' ? treinoItems : [];
+    const modality = typeof currentModality !== 'undefined' ? currentModality : 'forca';
+    const mfg = (typeof getModalidadeFicha === 'function') ? getModalidadeFicha(modality) : null;
+    const modLabel = (typeof MODALITY_CONFIG !== 'undefined' && MODALITY_CONFIG[modality]) ? MODALITY_CONFIG[modality].label : 'Musculação';
+    const nome     = document.getElementById('treino-nome') ? document.getElementById('treino-nome').value : 'Treino';
+
+    // -- Client info
+    const clientName = client ? client.name : 'Cliente';
+    const initials   = client ? client.initials : 'JP';
+    const obj        = client ? client.obj : 'Hipertrofia';
+    const freq       = client ? client.freq : '4x/semana';
+    const tags       = client ? client.tags || [] : [];
+
+    document.getElementById('ficha-avatar').textContent = initials;
+    document.getElementById('ficha-client-name').innerHTML = clientName + ' <span style="width:8px;height:8px;border-radius:50%;background:var(--green);display:inline-block;"></span>';
+    document.getElementById('ficha-obj').textContent = obj;
+    document.getElementById('ficha-freq').textContent = freq;
+    document.getElementById('ficha-modal-label').textContent = modLabel;
+    document.getElementById('ficha-date').textContent = new Date().toLocaleDateString('pt-BR');
+    document.getElementById('ficha-subtitle').textContent = nome + ' — ' + modLabel;
+    var _ec=document.getElementById('ficha-ex-count'); if(_ec) _ec.textContent=items.length;
+
+    // -- Muscle groups
+    const muscles = [...new Set(items.map(it => it.musculo || it.grupo || '').filter(Boolean))].slice(0,4);
+    var _mc=document.getElementById('ficha-muscles'); if(_mc) _mc.innerHTML=muscles.length?muscles.join('<br>'):'Múltiplos grupos';
+
+    // -- Exercises table
+    const tbody = document.getElementById('ficha-exercises-tbody');
+    fichaCheckState = {};
+    tbody.innerHTML = items.map(function(it, i) {
+      fichaCheckState[i] = false;
+      var hidden = i >= 6 ? 'class="ficha-ex-hidden" style="display:none;"' : '';
+      var cells;
+      if (mfg && mfg.camposItem) {
+        cells = mfg.camposItem(it);
+      } else {
+        var name = it.name || it.exercicio || it.nome || 'Exercício ' + (i+1);
+        cells = [name, it.series||4, it.reps||'8–10', (it.carga||'—')+'kg', it.rir||2];
+      }
+      var obs = it.obs || it.observacao || '';
+      return '<tr ' + hidden + ' style="border-bottom:1px solid #f5f5f5;">'
+        + '<td style="padding:8px;color:#888;">' + (i+1) + '</td>'
+        + cells.map(function(c){ return '<td style="padding:8px;">' + (c||'—') + '</td>'; }).join('')
+        + '<td style="padding:8px;color:#888;font-size:11px;">' + (obs||'—') + '</td>'
+        + '</tr>';
+    }).join('');
+    if (items.length > 6) {
+      document.getElementById('ficha-show-more').style.display = 'block';
+    } else {
+      document.getElementById('ficha-show-more').style.display = 'none';
+    }
+
+    // -- Checklist
+    const checkList = document.getElementById('ficha-checklist');
+    checkList.innerHTML = items.slice(0,8).map((it, i) => {
+      const name = it.name || it.exercise || it.exercicio || 'Exercício ' + (i+1);
+      return '<label style="display:flex;align-items:center;gap:6px;cursor:pointer;">'
+        + '<input type="checkbox" onchange="updateFichaChecklist()" style="accent-color:var(--green);">'
+        + '<span>' + name + '</span></label>';
+    }).join('');
+    updateFichaChecklist();
+    document.getElementById('ficha-checklist-summary').textContent = '0 de ' + Math.min(items.length, 8) + ' exercícios concluídos';
+
+    // -- Cuidados
+    const cuidadosList = document.getElementById('ficha-cuidados-list');
+    const allTags = tags.map(t => t.replace('#','').toLowerCase());
+    let cuidadosHtml = '';
+    Object.entries(CUIDADOS_MAP).forEach(([key, val]) => {
+      if (allTags.some(t => t.includes(key.toLowerCase())) || 
+          (clientId === 'maria' && key === 'Hipertensão') ||
+          (clientId === 'joao' && key === 'TDAH')) {
+        cuidadosHtml += '<div style="margin-bottom:10px;">'
+          + '<div style="font-weight:600;margin-bottom:4px;">' + val.icon + ' ' + key + '</div>'
+          + val.items.map(item => '<div style="color:#555;padding:2px 0;">• ' + item + '</div>').join('')
+          + '</div>';
+      }
+    });
+    if (!cuidadosHtml) {
+      cuidadosHtml = '<div style="color:#888;">Nenhum cuidado específico identificado.</div>';
+    }
+    cuidadosList.innerHTML = cuidadosHtml;
+
+    // -- Alternativas
+    const altEl = document.getElementById('ficha-alternatives');
+    const topItems = items.slice(0,3);
+    altEl.innerHTML = topItems.map(it => {
+      const name = it.name || it.exercise || it.exercicio || '';
+      const alts = ALTERNATIVAS_MAP[name] || ['Variação 1','Variação 2','Variação 3'];
+      return '<div style="margin-bottom:10px;">'
+        + '<div style="font-weight:600;margin-bottom:6px;font-size:12px;">' + (name || '—') + '</div>'
+        + '<div style="display:flex;flex-wrap:wrap;gap:4px;">'
+        + alts.map(a => '<span style="font-size:10px;padding:3px 8px;border-radius:6px;background:#f0fdf4;color:var(--green);border:1px solid rgba(29,158,117,.2);">' + a + '</span>').join('')
+        + '</div></div>';
+    }).join('');
+    if (!topItems.length) altEl.innerHTML = '<div style="color:#888;font-size:12px;">Adicione exercícios ao treino.</div>';
+
+    // -- Resumo IA
+    var iaEl = document.getElementById('ficha-ia-summary');
+    if (iaEl && mfg.resumoIA) iaEl.innerHTML = mfg.resumoIA(obj);
+
+    // -- Frequência circle
+    const freqNum = parseInt(freq) || 4;
+    const adherence = Math.round((3 / freqNum) * 100);
+    const circumference = 201;
+    const offset = circumference - (adherence / 100) * circumference;
+    document.getElementById('ficha-adherence').textContent = adherence + '%';
+    document.getElementById('ficha-freq-ideal').textContent = freq;
+    const circle = document.getElementById('ficha-freq-circle');
+    if (circle && circle.style) { circle.style.strokeDashoffset = offset; }
+
+    // -- Histórico
+    const hist = document.getElementById('ficha-historico');
+    const histEntries = [
+      { date: new Date().toLocaleDateString('pt-BR'), time: new Date().toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'}), label: 'Treino', desc: 'Ficha gerada.' },
+    ];
+    const savedHist = (typeof loadObservations === 'function') ? loadObservations(clientId).slice(0,3) : [];
+    savedHist.forEach(obs => {
+      const text = typeof obs === 'string' ? obs : (obs.text || '');
+      histEntries.push({ date: obs.date || '—', time: '', label: 'Registro', desc: text.slice(0,60) });
+    });
+    hist.innerHTML = histEntries.map(h => 
+      '<div style="display:flex;gap:8px;padding:6px 0;border-bottom:1px solid #f5f5f5;">'
+      + '<div style="width:6px;height:6px;border-radius:50%;background:var(--green);margin-top:4px;flex-shrink:0;"></div>'
+      + '<div><div style="font-weight:600;">' + h.label + '</div>'
+      + '<div style="color:#888;">' + h.date + (h.time ? ' ' + h.time : '') + '</div>'
+      + '<div style="color:#555;">' + h.desc + '</div></div></div>'
+    ).join('');
+
+    // -- Resumo executivo
+    document.getElementById('ficha-resumo-exec').innerHTML =
+      'Cliente apresenta boa aderência ao programa.<br>'
+      + 'Volume adequado para o objetivo de <strong>' + obj + '</strong>.<br>'
+      + 'Frequência: ' + freq + ' · ' + items.length + ' exercícios selecionados.';
+    document.getElementById('ficha-sugestao').textContent =
+      'Manter progressão atual e monitorar resposta na próxima reavaliação.';
+
+
+    // -- Análise do Perfil
+    const perfilEl = document.getElementById('ficha-perfil-table');
+    if (perfilEl) {
+      const perfil = [
+        ['Idade', client ? (client.age + ' anos') : '—'],
+        ['Peso', client ? (client.weight || '—') : '—'],
+        ['Altura', client ? (client.height || '—') : '—'],
+        ['Experiência', client ? (client.exp || '2 anos') : '—'],
+        ['Objetivo principal', obj],
+        ['Disponibilidade', client ? (client.availTime || 'Manhã') : '—'],
+        ['Nível de estresse', 'Moderado'],
+      ];
+      perfilEl.innerHTML = perfil.map(([k,v]) => 
+        '<div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #f5f3ef;"><span style="color:#888;">' + k + '</span><span style="font-weight:500;">' + v + '</span></div>'
+      ).join('');
+    }
+
+    // -- Análise NERAS
+    const analiseEl = document.getElementById('ficha-analise-neras');
+    if (analiseEl) {
+      analiseEl.textContent = 'Cliente possui base ' + (client ? client.level : 'intermediária') + ' e boa frequência disponível. Potencial de evolução alto com controle de volume e progressão constante.';
+    }
+
+    // -- Volume muscular
+    const volTbody = document.getElementById('ficha-volume-tbody');
+    if (volTbody) {
+      volTbody.innerHTML = VOLUME_MUSCULAR.map(v => {
+        const [min,max] = v.ideal.split('–').map(Number);
+        const pct = Math.min(100, Math.round((v.series / max) * 100));
+        const status = v.series < min ? 'Baixo' : v.series > max ? 'Acima do ideal' : 'Adequado';
+        const color = v.series < min ? '#EF4444' : v.series > max ? '#3B82F6' : '#1D9E75';
+        return '<tr style="border-bottom:1px solid #f5f3ef;">'
+          + '<td style="padding:8px;font-weight:500;">👤 ' + v.grupo + '</td>'
+          + '<td style="padding:8px;text-align:center;">' + v.series + '</td>'
+          + '<td style="padding:8px;text-align:center;">' + v.ideal + '</td>'
+          + '<td style="padding:8px;text-align:center;"><span style="color:' + color + ';font-weight:600;">' + status + '</span></td>'
+          + '<td style="padding:8px;"><div style="background:#f0eeea;border-radius:4px;height:8px;overflow:hidden;"><div style="background:' + color + ';width:' + pct + '%;height:100%;border-radius:4px;"></div></div></td>'
+          + '</tr>';
+      }).join('');
+    }
+
+    // -- Técnicas
+    const tecList = document.getElementById('ficha-tecnicas-list');
+    if (tecList && mfg.tecnicas) {
+      tecList.innerHTML = mfg.tecnicas.map((t,i,arr) =>
+        '<div style="display:flex;justify-content:space-between;padding-bottom:8px;' + (i<arr.length-1?'border-bottom:1px solid #f0eeea;':'') + '">'
+        + '<span style="font-weight:600;display:flex;align-items:center;gap:6px;">' + t[0] + '</span>'
+        + '<span style="color:#888;">' + t[1] + '</span></div>'
+      ).join('');
+    }
+
+    // -- Divisão de treino
+    const divisaoEl = document.getElementById('ficha-divisao');
+    const divisaoTitle = document.getElementById('ficha-divisao-title');
+    if (divisaoEl) {
+            const freqN = parseInt(freq) || 4;
+      var divCor = mfg ? (mfg.cor || '#1D9E75') : '#1D9E75';
+      var divIcon = mfg ? (mfg.icon || '🏋️') : '🏋️';
+      var divLabel = mfg ? (mfg.label || 'Treino') : 'Treino';
+      if (divisaoTitle) divisaoTitle.textContent = divLabel + ' — Protocolo (' + freq + ')';
+      var divisoes = (mfg && mfg.divisao) ? mfg.divisao(freqN) : [];
+      if (!divisoes.length) divisoes = [
+        {l:'TREINO A',s:'Superior',i:['Peito','Costas','Ombros','Braços']},
+        {l:'TREINO B',s:'Inferior',i:['Quadríceps','Posterior','Glúteos','Panturrilhas']},
+      ];
+      divisaoEl.style.gridTemplateColumns = 'repeat(' + Math.min(Math.max(divisoes.length,2),4) + ',1fr)';
+      divisaoEl.innerHTML = divisoes.map(function(d) {
+        var lbl = d.l || d.label || '';
+        var sub = d.s || d.sub || '';
+        var items = d.i || d.items || [];
+        return '<div style="background:#f8f7f3;border-radius:8px;padding:12px;">'
+          + '<div style="font-size:11px;font-weight:700;color:' + divCor + ';display:flex;align-items:center;gap:6px;margin-bottom:4px;"><span>' + divIcon + '</span>' + lbl + '</div>'
+          + '<div style="font-size:10px;color:#888;margin-bottom:8px;">' + sub + '</div>'
+          + items.map(function(item){ return '<div style="font-size:11px;padding:2px 0;">• ' + item + '</div>'; }).join('')
+          + '</div>';
+      }).join('');
+    }
+
+    // -- Métricas
+    const metEl = document.getElementById('ficha-metricas');
+    if (metEl) {
+      const totalSeries = items.length * 4;
+      const metricas = [
+        { icon:'📦', label:'Volume Total Semanal', val: totalSeries + ' séries' },
+        { icon:'⚡', label:'Carga Média Utilizada', val: (client && client.weight ? client.weight : '78 kg') },
+        { icon:'📅', label:'Frequência Semanal', val: freq },
+        { icon:'📊', label:'Índice de Aderência', val: '75%' },
+        { icon:'💤', label:'Nível de Recuperação', val: 'Bom' },
+        { icon:'🦺', label:'Risco de Lesão', val: 'Baixo' },
+      ];
+      metEl.innerHTML = metricas.map(m => 
+        '<div style="display:flex;align-items:center;justify-content:space-between;padding:7px 0;border-bottom:1px solid #f5f3ef;">'
+        + '<span style="display:flex;align-items:center;gap:7px;color:#555;">' + m.icon + ' ' + m.label + '</span>'
+        + '<span style="font-weight:600;">' + m.val + '</span></div>'
+      ).join('');
+    }
+
+    // -- Progressão dinâmica
+    var progTbody = document.getElementById('ficha-progressao-tbody');
+    if (progTbody && mfg.progressao) {
+      var ncols = mfg.progressao[0] ? mfg.progressao[0].length : 6;
+      progTbody.innerHTML = mfg.progressao.map(function(row, ri) {
+        var last = ri === mfg.progressao.length-1;
+        return '<tr style="' + (last?'':'border-bottom:1px solid #f5f3ef;') + '">'
+          + row.map(function(cell, ci) {
+            if (ci===0) return '<td style="padding:8px;font-weight:600;">' + cell + '</td>';
+            if (ci===row.length-1) return '<td style="padding:8px;color:#888;font-size:11px;">' + cell + '</td>';
+            return '<td style="text-align:center;padding:8px;">' + cell + '</td>';
+          }).join('')
+          + '</tr>';
+      }).join('');
+    }
+
+    // -- Progressão header colunas dinâmicas
+    var progHead = document.getElementById('ficha-progressao-header');
+    if (progHead && mfg.progressao && mfg.progressao[0]) {
+      var headers = mfg.progressao[0].length >= 5 ? ['','Semana 1','Semana 2','Semana 3','Semana 4','Foco'] : ['','Fase 1','Fase 2','Fase 3','Foco'];
+      progHead.innerHTML = headers.map(function(h) {
+        return '<th style="text-align:' + (h?'center':'left') + ';padding:6px 8px;color:#aaa;font-size:10px;font-weight:600;text-transform:uppercase;">' + h + '</th>';
+      }).join('');
+    }
+
+    // -- Colunas tabela de exercícios dinâmica
+    var exHead = document.getElementById('ficha-ex-header');
+    if (exHead && mfg.colunas) {
+      exHead.innerHTML = '<th style="text-align:left;padding:8px;color:#aaa;font-weight:600;font-size:10px;text-transform:uppercase;width:3%;">#</th>'
+        + mfg.colunas.map(function(col) {
+          return '<th style="text-align:left;padding:8px;color:#aaa;font-weight:600;font-size:10px;text-transform:uppercase;">' + col + '</th>';
+        }).join('')
+        + '<th style="text-align:left;padding:8px;color:#aaa;font-weight:600;font-size:10px;text-transform:uppercase;">Obs</th>';
+    }
+
+    // -- Título do bloco 2
+    var tec2 = document.getElementById('ficha-tecnicas-titulo');
+    if (tec2) tec2.textContent = mfg.icon + ' ' + mfg.label + ' — Técnicas Selecionadas';
+
+    // -- Próxima reavaliação (28 dias)
+    const nextDate = new Date(Date.now() + 28*24*60*60*1000);
+    const proxEl = document.getElementById('ficha-proxima-aval');
+    if (proxEl) proxEl.textContent = nextDate.toLocaleDateString('pt-BR');
+
+    // -- Resumo executivo
+    const resumoEl = document.getElementById('ficha-resumo-exec');
+    if (resumoEl) resumoEl.innerHTML = 
+      'Cliente apresenta boa aderência ao programa.<br>'
+      + 'Volume e frequência adequados, distribuição equilibrada e progressão planejada para 4 semanas.<br>'
+      + 'Manter disciplina e monitorar sinais de fadiga.';
+
+    const sugestaoEl = document.getElementById('ficha-sugestao');
+    if (sugestaoEl) sugestaoEl.textContent = 'Manter progressão atual e monitorar resposta na próxima reavaliação.';
+
+    // -- Update sidebar
+    const sbName = document.getElementById('ficha-sb-name');
+    const sbAvatar = document.getElementById('ficha-sb-avatar');
+    if (sbName) sbName.textContent = clientName;
+    if (sbAvatar) sbAvatar.textContent = initials;
+
+    // Show modal
+    document.getElementById('ficha-modal-overlay').style.display = 'block';
+  }
+
+  function updateFichaChecklist() {
+    const checks = document.querySelectorAll('#ficha-checklist input[type=checkbox]');
+    const total = checks.length;
+    const done  = Array.from(checks).filter(c => c.checked).length;
+    const pct   = total ? Math.round((done/total)*100) : 0;
+    const pctEl = document.getElementById('ficha-checklist-pct');
+    const sumEl = document.getElementById('ficha-checklist-summary');
+    const circle = document.getElementById('ficha-checklist-circle');
+    if (pctEl) pctEl.textContent = pct + '%';
+    if (sumEl) sumEl.textContent = done + ' de ' + total + ' exercícios concluídos';
+    if (circle) {
+      const circumference = 163;
+      circle.style.strokeDashoffset = circumference - (pct/100)*circumference;
     }
   }
 
-  // ── HOOK: Update context bar when IA page opens ────────────
+  function duplicarFicha() {
+    showToast('✓ Ficha duplicada no histórico do cliente');
+    salvarFicha(window.globalCliente || 'joao', 'Cópia do Treino', (typeof treinoItems !== 'undefined' ? treinoItems.length : 0));
+  }
 
+  function editarObservacoesFicha() {
+    const el = document.getElementById('ficha-obs');
+    if (!el) return;
+    const current = el.textContent;
+    const novo = prompt('Editar observações:', current);
+    if (novo !== null) el.textContent = novo;
+  }
 
-  // ── INIT: ensure dashboard visible on load ──────────────
-  // Pages are hidden/shown by showPage() via style.display
-  // On load, dashboard is active by default (class="page active" in HTML)
+  function exportarFichaPDF() {
+    showToast('📄 Preparando exportação PDF...');
+    setTimeout(() => {
+      try {
+        window.print();
+      } catch(e) {
+        showToast('Use Ctrl+P para imprimir como PDF');
+      }
+    }, 300);
+  }
+
 </script>
 </body>
 </html>
